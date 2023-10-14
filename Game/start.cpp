@@ -1,22 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include "game_functions.h"  // game_functions.h 헤더 파일을 포함
+
+using namespace sf;  // SFML 네임스페이스를 사용
 
 int main()
 {
-    using namespace sf;
-
-    // 창 생성
     RenderWindow window(VideoMode(1500, 843), "리듬 게임");
 
-    // 이미지 로드
     Texture texture;
-    if (!texture.loadFromFile("images/start_backgroud.png")) {
-        // 이미지를 로드하는 데 문제가 생기면 오류 메시지 출력
+    if (!texture.loadFromFile("images/start_background.png")) {
         return 1;
     }
-
-    Sprite sprite;
-    sprite.setTexture(texture);
-    sprite.setPosition(0, 0); // 이미지의 위치 설정
 
     while (window.isOpen())
     {
@@ -28,7 +22,9 @@ int main()
         }
 
         window.clear();
-        window.draw(sprite); // 이미지를 화면에 그립니다.
+
+        DisplayBackground(window, texture);  // DisplayBackground 함수 호출
+
         window.display();
     }
 

@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="backgroud.cpp">
+    <ClCompile Include="background.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="combo.cpp">
@@ -27,5 +27,13 @@
     <ClCompile Include="start.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="game_functions.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game_functions.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
