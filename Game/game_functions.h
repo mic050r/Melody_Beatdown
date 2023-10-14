@@ -5,5 +5,5 @@
 
 void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture);
 void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int y);
-
+void start();
 #endif // GAME_FUNCTIONS_H
