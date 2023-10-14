@@ -1,7 +1,7 @@
-#include "game_functions.h"
+ï»¿#include "game_functions.h"
 
 int main() {
-    start(); // start() ÇÔ¼ö È£Ãâ
+    start(); // start() í•¨ìˆ˜ í˜¸ì¶œ
 
     return 0;
 }

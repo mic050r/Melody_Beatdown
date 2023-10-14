@@ -12,3 +12,4 @@ void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int 
     note.setPosition(x, y);
     window.draw(note);
 }
+

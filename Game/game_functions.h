@@ -3,7 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 
+
 void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture);
 void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int y);
 void start();
+void pick_music();
+
 #endif // GAME_FUNCTIONS_H
