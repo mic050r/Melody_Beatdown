@@ -16,31 +16,29 @@ void pick_music() {
     }
 
     Texture music2Texture;
-    if (music2Texture.loadFromFile("images/music_spicy2.png")) {
+    if (music2Texture.loadFromFile("images/test1.png")) {
         musicTextures.push_back(music2Texture);
     }
 
     Texture music3Texture;
-    if (music3Texture.loadFromFile("images/music_spicy3.png")) {
+    if (music3Texture.loadFromFile("images/test2.png")) {
         musicTextures.push_back(music3Texture);
     }
 
     int currentMusicIndex = 0;
 
-    RectangleShape nextButton(Vector2f(29, 57));
+    RectangleShape nextButton(Vector2f(134, 134));
     Texture nextButtonTexture;
     if (nextButtonTexture.loadFromFile("images/next_btn.png")) {
         nextButton.setTexture(&nextButtonTexture);
-        nextButton.setPosition(1415, 396);
-        nextButton.setFillColor(Color::White);
+        nextButton.setPosition(1366, 401);
     }
 
-    RectangleShape prevButton(Vector2f(29, 57));
+    RectangleShape prevButton(Vector2f(134, 134));
     Texture prevButtonTexture;
     if (prevButtonTexture.loadFromFile("images/prev_btn.png")) {
         prevButton.setTexture(&prevButtonTexture);
-        prevButton.setPosition(56, 396);
-        prevButton.setFillColor(Color::White);
+        prevButton.setPosition(0, 401);
     }
 
     bool startGame = false;
@@ -50,7 +48,6 @@ void pick_music() {
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed)
                 window.close();
-            // TODO : next, prev 버튼 누르면 다른 이미지 나오게 만들기
             if (!startGame && event.type == Event::MouseButtonPressed) {
                 Vector2i mousePos = Mouse::getPosition(window);
                 if (nextButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
