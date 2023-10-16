@@ -8,5 +8,6 @@ void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture)
 void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int y);
 void start();
 void pick_music();
+void gameStart(int nowSelected);
 
 #endif // GAME_FUNCTIONS_H

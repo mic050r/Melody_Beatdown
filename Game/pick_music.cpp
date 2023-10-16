@@ -89,8 +89,10 @@ void pick_music() {
 
             if (startGame) {
                 // 게임 화면으로 전환
-                // TODO: 게임 화면을 구현하기
+                musicInfoList[currentMusicIndex].music->stop();
+                gameStart(currentMusicIndex);
             }
+
             else {
                 // 음악 선택 화면 표시
                 Sprite musicSprite(musicTextures[currentMusicIndex]);
