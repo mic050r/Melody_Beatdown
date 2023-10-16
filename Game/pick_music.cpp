@@ -1,11 +1,32 @@
 ﻿#include <vector>
 #include "game_functions.h"
+#include <SFML/Audio.hpp>
+//#include <memory>
 
 using namespace sf;
 using namespace std;
 
 void pick_music() {
     RenderWindow window(VideoMode(1500, 843), "음악 선택");
+
+
+    // 음악 파일 경로를 저장할 벡터
+    vector<string> musicPaths = {
+        "music/Aespa-Spicy.wav",
+        "music/Aespa-Hold-On-Tight.wav",
+        "music/Aespa-Better-Things.wav"
+    };
+
+    // 스마트 포인터를 사용하여 음악 객체 관리
+    vector<shared_ptr<Music>> musicVector;
+
+    for (const std::string& path : musicPaths) {
+        std::shared_ptr<sf::Music> music = std::make_shared<sf::Music>();
+        if (music->openFromFile(path)) {
+            musicVector.push_back(music);
+        }
+    }
+
 
     // 이미지 텍스처를 저장하는 벡터
     vector<Texture> musicTextures;
@@ -16,12 +37,12 @@ void pick_music() {
     }
 
     Texture music2Texture;
-    if (music2Texture.loadFromFile("images/test1.png")) {
+    if (music2Texture.loadFromFile("images/music_hot.png")) {
         musicTextures.push_back(music2Texture);
     }
 
     Texture music3Texture;
-    if (music3Texture.loadFromFile("images/test2.png")) {
+    if (music3Texture.loadFromFile("images/music_bt.png")) {
         musicTextures.push_back(music3Texture);
     }
 
@@ -43,20 +64,30 @@ void pick_music() {
 
     bool startGame = false;
 
+    // TODO : 처음 곡 선택화면에서 음악 재생 안되는 오류 해결하기 + 음악 소리 겹치는거 해결하기
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed)
                 window.close();
             if (!startGame && event.type == Event::MouseButtonPressed) {
-                Vector2i mousePos = Mouse::getPosition(window);
+                Vector2i mousePos = Mouse::getPosition(window);   
                 if (nextButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
                     // 다음 음악 텍스처로 업데이트
                     currentMusicIndex = (currentMusicIndex + 1) % musicTextures.size();
+                    // 현재 재생 중인 음악 멈추고 다음 음악 재생
+                    if (currentMusicIndex < musicVector.size()) {
+                        musicVector[currentMusicIndex]->stop();
+                        musicVector[currentMusicIndex]->play();
+                    }
                 }
                 else if (prevButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
                     // 이전 음악 텍스처로 업데이트
                     currentMusicIndex = (currentMusicIndex - 1 + musicTextures.size()) % musicTextures.size();
+                    if (currentMusicIndex >= 0 && currentMusicIndex < musicVector.size()) {
+                        musicVector[currentMusicIndex]->stop();
+                        musicVector[currentMusicIndex]->play();
+                    }
                 }
                 else {
                     startGame = true;
