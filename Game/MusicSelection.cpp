@@ -1,58 +1,45 @@
-ï»¿#include <vector>
-#include "game_functions.h"
-#include <SFML/Audio.hpp>
+#include "MusicSelection.h"
+#include <iostream>
 
-using namespace sf;
-using namespace std;
 
-// MusicInfo êµ¬ì¡°ì²´ë¥¼ ì •ì˜í•˜ì—¬ ìŒì•… ê´€ë ¨ ì •ë³´ë¥¼ ì‰½ê²Œ ê´€ë¦¬
-struct MusicInfo {
-    string path;
-    Texture texture;
-    shared_ptr<Music> music;
-};
-
-void pick_music() {
-    RenderWindow window(VideoMode(1500, 843), "ìŒì•… ì„ íƒ");
-
-    // ìŒì•… ì •ë³´ë¥¼ ì €ì¥í•˜ëŠ” ë²¡í„°
-    vector<MusicInfo> musicInfoList = {
-        {"music/Aespa-Spicy.wav", Texture(), make_shared<Music>()},
-        {"music/Aespa-Hold-On-Tight.wav", Texture(), make_shared<Music>()},
-        {"music/Aespa-Better-Things.wav", Texture(), make_shared<Music>()}
+MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
+    // À½¾Ç Á¤º¸ ÃÊ±âÈ­
+    musicInfoList = {
+        { "music/Aespa-Spicy.wav", sf::Texture(), std::make_shared<sf::Music>() },
+        { "music/Aespa-Hold-On-Tight.wav", sf::Texture(), std::make_shared<sf::Music>() },
+        { "music/Aespa-Better-Things.wav", sf::Texture(), std::make_shared<sf::Music>() }
     };
 
-    // ì´ë¯¸ì§€ í…ìŠ¤ì²˜ë¥¼ ì €ì¥í•˜ëŠ” ë²¡í„°
-    vector<Texture> musicTextures = {
-        Texture(), Texture(), Texture()
-    };
+    // ÅØ½ºÃ³ ÃÊ±âÈ­
+    musicTextures = { sf::Texture(), sf::Texture(), sf::Texture() };
 
-    // ì´ë¯¸ì§€ í…ìŠ¤ì²˜ë¥¼ ë¯¸ë¦¬ ë¡œë“œ
+    // ÀÌ¹ÌÁö ÅØ½ºÃ³ ¹Ì¸® ·Îµå
     for (size_t i = 0; i < musicTextures.size(); ++i) {
-        if (musicTextures[i].loadFromFile("images/music" + to_string(i + 1) + ".png")) {
-            // í…ìŠ¤ì²˜ ë¡œë“œ ì„±ê³µ
+        if (musicTextures[i].loadFromFile("images/music" + std::to_string(i + 1) + ".png")) {
+            // ÅØ½ºÃ³ ·Îµå ¼º°ø
         }
     }
 
-    int currentMusicIndex = 0;
-
-    RectangleShape nextButton(Vector2f(134, 134));
+    // ¹öÆ° ÃÊ±âÈ­
+    nextButton.setSize(sf::Vector2f(134, 134));
     nextButton.setPosition(1366, 401);
-    Texture nextButtonTexture;
+    sf::Texture nextButtonTexture;
     if (nextButtonTexture.loadFromFile("images/next_btn.png")) {
         nextButton.setTexture(&nextButtonTexture);
     }
 
-    RectangleShape prevButton(Vector2f(134, 134));
+    prevButton.setSize(sf::Vector2f(134, 134));
     prevButton.setPosition(0, 401);
-    Texture prevButtonTexture;
+    sf::Texture prevButtonTexture;
     if (prevButtonTexture.loadFromFile("images/prev_btn.png")) {
         prevButton.setTexture(&prevButtonTexture);
     }
+}
+// TODO : next,prev btn ÀÌ¹ÌÁö ¿À·ù ÇØ°áÇÏ±â
+void MusicSelection::run() {
+    sf::RenderWindow window(sf::VideoMode(1500, 843), "À½¾Ç ¼±ÅÃ");
 
-    bool startGame = false;
-
-    // ìŒì•… ë¡œë”© ë° ì¬ìƒ
+    // À½¾Ç ·Îµù ¹× Àç»ı
     for (size_t i = 0; i < musicInfoList.size(); ++i) {
         if (musicInfoList[i].music->openFromFile(musicInfoList[i].path)) {
             musicInfoList[i].music->stop();
@@ -62,20 +49,20 @@ void pick_music() {
     musicInfoList[currentMusicIndex].music->play();
 
     while (window.isOpen()) {
-        Event event;
+        sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
                 window.close();
-            if (!startGame && event.type == Event::MouseButtonPressed) {
-                Vector2i mousePos = Mouse::getPosition(window);
+            if (!startGame && event.type == sf::Event::MouseButtonPressed) {
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 if (nextButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
-                    // ì¤‘ì§€í•˜ê³  ë‹¤ìŒ ìŒì•… ì¬ìƒ
+                    // ÁßÁöÇÏ°í ´ÙÀ½ À½¾Ç Àç»ı
                     musicInfoList[currentMusicIndex].music->stop();
                     currentMusicIndex = (currentMusicIndex + 1) % musicTextures.size();
                     musicInfoList[currentMusicIndex].music->play();
                 }
                 else if (prevButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
-                    // ì¤‘ì§€í•˜ê³  ì´ì „ ìŒì•… ì¬ìƒ
+                    // ÁßÁöÇÏ°í ÀÌÀü À½¾Ç Àç»ı
                     musicInfoList[currentMusicIndex].music->stop();
                     currentMusicIndex = (currentMusicIndex - 1 + musicTextures.size()) % musicTextures.size();
                     musicInfoList[currentMusicIndex].music->play();
@@ -88,14 +75,14 @@ void pick_music() {
             window.clear();
 
             if (startGame) {
-                // ê²Œì„ í™”ë©´ìœ¼ë¡œ ì „í™˜
+                // °ÔÀÓ È­¸éÀ¸·Î ÀüÈ¯
                 musicInfoList[currentMusicIndex].music->stop();
-                gameStart(currentMusicIndex);
+                // gameStart(currentMusicIndex);
+                std::cout << "ÀÌÁö¼ö ¹Ùº¸0";
             }
-
             else {
-                // ìŒì•… ì„ íƒ í™”ë©´ í‘œì‹œ
-                Sprite musicSprite(musicTextures[currentMusicIndex]);
+                // À½¾Ç ¼±ÅÃ È­¸é Ç¥½Ã
+                sf::Sprite musicSprite(musicTextures[currentMusicIndex]);
                 musicSprite.setPosition(0, 0);
                 window.draw(musicSprite);
                 window.draw(nextButton);
@@ -105,6 +92,4 @@ void pick_music() {
             window.display();
         }
     }
-
 }
-

@@ -1,5 +1,7 @@
-﻿#include "game_functions.h"
+﻿
 #include "MusicSelection.h"
+#include "game_functions.h"
+
 
 using namespace sf;
 
@@ -13,22 +15,22 @@ public:
     StartScreen() : window(VideoMode(1500, 843), "리듬 게임") {
         // 게임 시작 화면의 배경 이미지 로드
         if (!backgroundTexture.loadFromFile("images/start_background.png")) {
+            // 이미지 로드 실패 시 예외 처리 또는 오류 처리를 추가할 수 있음
             return;
         }
     }
 
-    // 게임 시작 화면 렌더링 및 이벤트 처리
     void run() {
+        MusicSelection musicSelection;  // MusicSelection 객체 생성
+
         while (window.isOpen()) {
             Event event;
             while (window.pollEvent(event)) {
                 if (event.type == Event::Closed)
                     window.close();
                 else if (event.type == Event::MouseButtonPressed) {
-                    // 화면 클릭 이벤트 감지]
-                    MusicSelection musicSelection;
-                    musicSelection.run();
-
+                    // 화면 클릭 이벤트 감지
+                    musicSelection.run();  // MusicSelection 실행
                     window.close();
                 }
             }
