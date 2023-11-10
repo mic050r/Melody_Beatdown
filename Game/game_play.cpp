@@ -1,4 +1,6 @@
 #include "game_functions.h"
+#include "GameFunctions.h"
+#include "MusicSelection.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -19,10 +21,11 @@ bool isButtonClicked(const RectangleShape& button, const Vector2f& clickPosition
 
 void HandleMouseClick(const RectangleShape& button, const Vector2f& clickPosition) {
     if (isButtonClicked(button, clickPosition)) {
-        pick_music();
+        MusicSelection musicSelection;
+        musicSelection.run();
+
     }
 }
-
 
 void gameStart(int nowSelected) {
     RenderWindow window(VideoMode(1500, 843), "게임 화면");
@@ -115,4 +118,5 @@ void gameStart(int nowSelected) {
         window.display();
     }
 }
+
 

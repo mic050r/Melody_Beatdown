@@ -1,4 +1,5 @@
 #include "MusicSelection.h"
+#include "game_functions.h"
 #include <iostream>
 
 
@@ -20,12 +21,16 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
         }
     }
 
+
     // 버튼 초기화
     nextButton.setSize(sf::Vector2f(134, 134));
     nextButton.setPosition(1366, 401);
     sf::Texture nextButtonTexture;
     if (nextButtonTexture.loadFromFile("images/next_btn.png")) {
         nextButton.setTexture(&nextButtonTexture);
+    }
+    else {
+        std::cout << "error";
     }
 
     prevButton.setSize(sf::Vector2f(134, 134));
@@ -77,8 +82,7 @@ void MusicSelection::run() {
             if (startGame) {
                 // 게임 화면으로 전환
                 musicInfoList[currentMusicIndex].music->stop();
-                // gameStart(currentMusicIndex);
-                std::cout << "이지수 바보0";
+                gameStart(currentMusicIndex);
             }
             else {
                 // 음악 선택 화면 표시
@@ -87,6 +91,7 @@ void MusicSelection::run() {
                 window.draw(musicSprite);
                 window.draw(nextButton);
                 window.draw(prevButton);
+                
             }
 
             window.display();

@@ -8,7 +8,6 @@ class StartScreen {
 private:
     RenderWindow window;
     Texture backgroundTexture;
-
 public:
     StartScreen() : window(VideoMode(1500, 843), "리듬 게임") {
         // 게임 시작 화면의 배경 이미지 로드

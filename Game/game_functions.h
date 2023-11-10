@@ -8,7 +8,7 @@ void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture)
 
 // 게임 화면에 노트를 표시하는 함수
 // x, y는 노트의 위치
-void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int y);
+void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTxexture, int x, int y);
 
 // 게임 시작 처리를 담당하는 함수
 void start();

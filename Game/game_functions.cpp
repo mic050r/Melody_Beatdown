@@ -24,3 +24,4 @@ void DisplayText(sf::RenderWindow& window, const std::string& text, const sf::Fo
     displayText.setPosition(x, y);
     window.draw(displayText);
 }
+
