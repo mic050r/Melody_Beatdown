@@ -1,4 +1,16 @@
 #include "game_functions.h"
+#include "MusicSelection.h"
+
+bool isButtonClicked(const sf::RectangleShape& button, const sf::Vector2f& clickPosition) {
+    return button.getGlobalBounds().contains(clickPosition);
+}
+
+void HandleMouseClick(const sf::RectangleShape& button, const sf::Vector2f& clickPosition) {
+    if (isButtonClicked(button, clickPosition)) {
+        MusicSelection musicSelection;
+        musicSelection.run();
+    }
+}
 
 void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture) {
     sf::Sprite background;

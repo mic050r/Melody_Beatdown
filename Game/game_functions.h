@@ -24,5 +24,7 @@ void gameStart(int nowSelected);
 // text는 표시할 텍스트 내용, font는 사용할 폰트, fontSize는 글꼴 크기, color는 글꼴 색상, (x, y)는 텍스트의 위치
 void DisplayText(sf::RenderWindow& window, const std::string& text, const sf::Font& font, unsigned int fontSize, const sf::Color& color, float x, float y);
 
+bool isButtonClicked(const sf::RectangleShape& button, const sf::Vector2f& clickPosition);
+void HandleMouseClick(const sf::RectangleShape& button, const sf::Vector2f& clickPosition);
 #endif // GAME_FUNCTIONS_H
 
