@@ -19,11 +19,19 @@ GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
     if (!backgroundTexture.loadFromFile(backgroundImagePath) ||
         !gameInfoTexture.loadFromFile(kGameInfoPath) ||
         !judgementLineTexture.loadFromFile(kJudgementLinePath) ||
-        !noteRouteTexture.loadFromFile(kNoteRoutePath) ||
+        !noteRouteSTexture.loadFromFile(kNoteRouteSPath) ||
+        !noteRouteDTexture.loadFromFile(kNoteRouteDPath) ||
+        !noteRouteFTexture.loadFromFile(kNoteRouteFPath) ||
+        !noteRouteSpace1Texture.loadFromFile(kNoteRouteSpace1Path) ||
+        !noteRouteSpace2Texture.loadFromFile(kNoteRouteSpace2Path) ||
+        !noteRouteJTexture.loadFromFile(kNoteRouteJPath) ||
+        !noteRouteKTexture.loadFromFile(kNoteRouteKPath) ||
+        !noteRouteLTexture.loadFromFile(kNoteRouteLPath) ||
         !noteRouteLineTexture.loadFromFile(kNoteRouteLinePath) ||
         !noteBasicTexture.loadFromFile(kNoteBasicPath)) {
         // 이미지 로드 실패 처리
     }
+
 
     // 이전 버튼 초기화
     prevButton.setSize(sf::Vector2f(80, 80));
@@ -72,14 +80,14 @@ void GameScreen::displayBackground() {
 
 void GameScreen::displayNoteRouteLines() {
     DisplayNote(window, gameInfoTexture, 0, 763);
-    DisplayNote(window, noteRouteTexture, 190, 0);
-    DisplayNote(window, noteRouteTexture, 330, 0);
-    DisplayNote(window, noteRouteTexture, 470, 0);
-    DisplayNote(window, noteRouteTexture, 610, 0);
-    DisplayNote(window, noteRouteTexture, 750, 0);
-    DisplayNote(window, noteRouteTexture, 890, 0);
-    DisplayNote(window, noteRouteTexture, 1030, 0);
-    DisplayNote(window, noteRouteTexture, 1170, 0);
+    DisplayNote(window, noteRouteSTexture, 190, 0);
+    DisplayNote(window, noteRouteDTexture, 330, 0);
+    DisplayNote(window, noteRouteFTexture, 470, 0);
+    DisplayNote(window, noteRouteSpace1Texture, 610, 0);
+    DisplayNote(window, noteRouteSpace2Texture, 750, 0);
+    DisplayNote(window, noteRouteJTexture, 890, 0);
+    DisplayNote(window, noteRouteKTexture, 1030, 0);
+    DisplayNote(window, noteRouteLTexture, 1170, 0);
     DisplayNote(window, noteBasicTexture, 194, 358);
     DisplayNote(window, noteBasicTexture, 335, 240);
     DisplayNote(window, noteBasicTexture, 474, 512);
@@ -109,8 +117,147 @@ void GameScreen::displayJudgementLine() {
     // 판정 라인 이미지 표시
     // ...
 }
+void GameScreen::pressS() {
+    // S 키가 눌렸을 때의 추가 로직
+    if (noteRouteSTexture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseS() {
+    // S 키가 떼졌을 때의 추가 로직
+    if (noteRouteSTexture.loadFromFile(kNoteRouteSPath)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::pressD() {
+    // D 키가 눌렸을 때의 추가 로직
+    if (noteRouteDTexture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseD() {
+    // D 키가 떼졌을 때의 추가 로직
+    if (noteRouteDTexture.loadFromFile(kNoteRouteDPath)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::pressF() {
+    // K 키가 눌렸을 때의 추가 로직
+    if (noteRouteFTexture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseF() {
+    // K 키가 떼졌을 때의 추가 로직
+    if (noteRouteFTexture.loadFromFile(kNoteRouteFPath)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::pressSpace() {
+    // Space 키가 눌렸을 때의 추가 로직
+    if (noteRouteSpace1Texture.loadFromFile(kNoteRoutePressed) && noteRouteSpace2Texture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseSpace() {
+    // Space 키가 떼졌을 때의 추가 로직
+    if (noteRouteSpace1Texture.loadFromFile(kNoteRouteSpace1Path) && noteRouteSpace2Texture.loadFromFile(kNoteRouteSpace2Path)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+
+void GameScreen::pressJ() {
+    // J 키가 눌렸을 때의 추가 로직
+    if (noteRouteJTexture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseJ() {
+    // J 키가 떼졌을 때의 추가 로직
+    if (noteRouteJTexture.loadFromFile(kNoteRouteJPath)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::pressK() {
+    // J 키가 눌렸을 때의 추가 로직
+    if (noteRouteKTexture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseK() {
+    // J 키가 떼졌을 때의 추가 로직
+    if (noteRouteKTexture.loadFromFile(kNoteRouteKPath)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::pressL() {
+    // L 키가 눌렸을 때의 추가 로직
+    if (noteRouteLTexture.loadFromFile(kNoteRoutePressed)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
+
+void GameScreen::releaseL() {
+    // L 키가 떼졌을 때의 추가 로직
+    if (noteRouteLTexture.loadFromFile(kNoteRouteLPath)) {
+        // 성공적으로 이미지를 로드했을 때의 추가 로직
+    }
+    else {
+        // 이미지 로드 실패 시 처리
+    }
+}
 
 void GameScreen::displayButtons() {
     window.draw(prevButton);
-    
 }

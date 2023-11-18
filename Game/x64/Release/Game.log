@@ -1,10 +1,13 @@
 ﻿  GameScreen.cpp
   game_functions.cpp
-C:\Users\bslim\Documents\workspace\Game\Game\game_functions.cpp(12,25): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\bslim\Documents\workspace\Game\Game\game_functions.cpp(12,22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bslim\Documents\workspace\Game\Game\game_functions.cpp(24,25): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bslim\Documents\workspace\Game\Game\game_functions.cpp(24,22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   game_play.cpp
-C:\Users\bslim\Documents\workspace\Game\Game\game_play.cpp(52,49): error C2039: 'getPrevButton': 'GameScreen'의 멤버가 아닙니다.
-C:\Users\bslim\Documents\workspace\Game\Game\GameScreen.h(7): message : 'GameScreen' 선언을 참조하십시오.
   MusicSelection.cpp
 C:\Users\bslim\Documents\workspace\Game\Game\MusicSelection.cpp(72,110): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   start.cpp
+  코드를 생성하고 있습니다.
+  Previous IPDB not found, fall back to full compilation.
+  All 350 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  코드를 생성했습니다.
+  Game.vcxproj -> C:\Users\bslim\Documents\workspace\Game\x64\Release\Game.exe

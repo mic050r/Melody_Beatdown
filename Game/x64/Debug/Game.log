@@ -1,2 +1,10 @@
 ﻿  GameScreen.cpp
+  MusicSelection.cpp
+C:\Users\bslim\Documents\workspace\Game\Game\MusicSelection.cpp(72,110): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  game_functions.cpp
+C:\Users\bslim\Documents\workspace\Game\Game\game_functions.cpp(24,25): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bslim\Documents\workspace\Game\Game\game_functions.cpp(24,22): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  game_play.cpp
+  start.cpp
+  코드를 생성하고 있습니다...
   Game.vcxproj -> C:\Users\bslim\Documents\workspace\Game\x64\Debug\Game.exe

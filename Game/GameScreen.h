@@ -17,12 +17,33 @@ public:
         return prevButton;
     }
 
+    void pressS();
+    void releaseS();
+    void pressD();
+    void releaseD();
+    void pressF();
+    void releaseF();
+    void pressSpace();
+    void releaseSpace();
+    void pressJ();
+    void releaseJ();
+    void pressK();
+    void releaseK();
+    void pressL();
+    void releaseL();
 private:
     sf::RenderWindow& window;
     sf::Texture backgroundTexture;
     sf::Texture gameInfoTexture;
     sf::Texture judgementLineTexture;
-    sf::Texture noteRouteTexture;
+    sf::Texture noteRouteSTexture;
+    sf::Texture noteRouteDTexture;
+    sf::Texture noteRouteFTexture;
+    sf::Texture noteRouteSpace1Texture;
+    sf::Texture noteRouteSpace2Texture;
+    sf::Texture noteRouteJTexture;
+    sf::Texture noteRouteKTexture;
+    sf::Texture noteRouteLTexture;
     sf::Texture noteRouteLineTexture;
     sf::Texture noteBasicTexture;
 
