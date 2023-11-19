@@ -8,7 +8,7 @@
 class GameScreen {
 public:
     GameScreen(sf::RenderWindow& window, int nowSelected);
-
+    
     void update();
 
     void render();
@@ -16,7 +16,7 @@ public:
     const sf::RectangleShape& getPrevButton() const {
         return prevButton;
     }
-
+    void handleInput(sf::Event event);
     void pressS();
     void releaseS();
     void pressD();
@@ -31,6 +31,7 @@ public:
     void releaseK();
     void pressL();
     void releaseL();
+
 private:
     sf::RenderWindow& window;
     sf::Texture backgroundTexture;
@@ -46,9 +47,16 @@ private:
     sf::Texture noteRouteLTexture;
     sf::Texture noteRouteLineTexture;
     sf::Texture noteBasicTexture;
+    sf::Texture noteRouteSTexturePressed;
 
     sf::RectangleShape prevButton;
+    void handleInput();
+    void handleKeyPress(sf::Keyboard::Key key);
+    void handleKeyRelease(sf::Keyboard::Key key);
 
+    // ... (이전 코드)
+
+    bool isSPressed;
     void displayBackground();
 
     void displayNoteRouteLines();
