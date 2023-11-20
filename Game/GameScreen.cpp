@@ -5,41 +5,157 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "constants.h"
-#include "iostream"
+#include <iostream>
 
 using namespace sf;
 using namespace std;
 
-
 Font font;
-bool isSPressed = false; // 다른 키에 대해서도 필요한 경우 유사한 변수 추가
+
 GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
-    : window(window), isSPressed(false) {
-    // 이미지 로드
-    std::string backgroundImagePath = kBackgroundPathPrefix + std::to_string(nowSelected + 1) + ".png";
-    if (!backgroundTexture.loadFromFile(backgroundImagePath) ||
-        !gameInfoTexture.loadFromFile(kGameInfoPath) ||
-        !judgementLineTexture.loadFromFile(kJudgementLinePath) ||
-        !noteRouteSTexture.loadFromFile(kNoteRouteSPath) ||
-        !noteRouteDTexture.loadFromFile(kNoteRouteDPath) ||
-        !noteRouteFTexture.loadFromFile(kNoteRouteFPath) ||
-        !noteRouteSpace1Texture.loadFromFile(kNoteRouteSpace1Path) ||
-        !noteRouteSpace2Texture.loadFromFile(kNoteRouteSpace2Path) ||
-        !noteRouteJTexture.loadFromFile(kNoteRouteJPath) ||
-        !noteRouteKTexture.loadFromFile(kNoteRouteKPath) ||
-        !noteRouteLTexture.loadFromFile(kNoteRouteLPath) ||
-        !noteRouteLineTexture.loadFromFile(kNoteRouteLinePath) ||
-        !noteBasicTexture.loadFromFile(kNoteBasicPath)) {
-        // 이미지 로드 실패 처리
+    : window(window), isSPressed(false), nowSelected(nowSelected) {
+    loadTextures(); // 이미지 로드
+    initPrevButton(); // 이전 버튼 초기화
+}
+
+
+void GameScreen::handleInput() {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::KeyPressed) {
+            handleKeyPress(event.key.code);
+        }
+        else if (event.type == sf::Event::KeyReleased) {
+            handleKeyRelease(event.key.code);
+        }
     }
+}
 
-    // 눌린 상태의 텍스처 로드
-    if (!noteRouteSTexturePressed.loadFromFile(kNoteRoutePressed)) {
-        // 로드 실패 처리
+void GameScreen::handleKeyPress(sf::Keyboard::Key key) {
+    if (key == sf::Keyboard::S) {
+        pressS();
+        cout << "s눌림";
     }
+    else if (key == sf::Keyboard::D) {
+        pressD(); cout << "d눌림";
+    }
+    else if (key == sf::Keyboard::F) {
+        pressF(); cout << "f눌림";
+    }
+    else if (key == sf::Keyboard::Space) {
+        pressSpace(); cout << "sacd눌림";
+    }
+    else if (key == sf::Keyboard::J) {
+        pressJ(); cout << "j눌림";
+    }
+    else if (key == sf::Keyboard::K) {
+        pressK(); cout << "k눌림";
+    }
+    else if (key == sf::Keyboard::L) {
+        pressL(); cout << "l눌림";
+    }
+}
+
+void GameScreen::handleKeyRelease(sf::Keyboard::Key key) {
+    if (key == sf::Keyboard::S) {
+        releaseS();
+    }
+    else if (key == sf::Keyboard::D) {
+        releaseD();
+    }
+    else if (key == sf::Keyboard::F) {
+        releaseF();
+    }
+    else if (key == sf::Keyboard::Space) {
+        releaseSpace();
+    }
+    else if (key == sf::Keyboard::J) {
+        releaseJ();
+    }
+    else if (key == sf::Keyboard::K) {
+        releaseK();
+    }
+    else if (key == sf::Keyboard::L) {
+        releaseL();
+    }
+    // 추가적인 키에 대한 case 추가
+}
 
 
-    // 이전 버튼 초기화
+
+void GameScreen::update() {
+    handleInput();
+    // 업데이트 로직
+}
+
+void GameScreen::pressS() {
+    noteRouteSTexture = noteRoutePressedTexture;
+    isSPressed = true;
+    // 키가 눌렸을 때 추가 로직
+}
+
+void GameScreen::releaseS() {
+
+    isSPressed = false;
+    // 키가 떼졌을 때 추가 로직
+}
+
+void GameScreen::pressD() {
+    noteRouteDTexture = noteRoutePressedTexture;
+    isSPressed = true;
+}
+
+void GameScreen::releaseD() {
+    
+    isSPressed = false;
+}
+
+void GameScreen::pressF() {
+    noteRouteFTexture = noteRoutePressedTexture;
+    isSPressed = true;
+}
+
+void GameScreen::releaseF() {
+    isSPressed = false;
+}
+
+void GameScreen::pressSpace() {
+    noteRouteSpace1Texture = noteRoutePressedTexture;
+    isSPressed = true;
+}
+
+void GameScreen::releaseSpace() {
+    isSPressed = false;
+}
+
+void GameScreen::pressJ() {
+    noteRouteJTexture = noteRoutePressedTexture;
+    isSPressed = true;
+}
+
+void GameScreen::releaseJ() {
+    isSPressed = false;
+}
+
+void GameScreen::pressK() {
+    noteRouteKTexture = noteRoutePressedTexture;
+    isSPressed = true;
+}
+
+void GameScreen::releaseK() {
+    isSPressed = false;
+}
+
+void GameScreen::pressL() {
+    noteRouteLTexture = noteRoutePressedTexture;
+    isSPressed = true;
+}
+
+void GameScreen::releaseL() {
+    isSPressed = false;
+}
+
+void GameScreen::initPrevButton() {
     prevButton.setSize(sf::Vector2f(80, 80));
     prevButton.setPosition(25, 23);
     sf::Texture prevButtonTexture;
@@ -54,189 +170,10 @@ GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
 
     prevButton.setTexture(&prevButtonTexture);
 }
-void GameScreen::update() {
-    handleInput();
-    // 업데이트 로직
-}
-void GameScreen::handleInput() {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::KeyPressed) {
-            handleKeyPress(event.key.code);
-        }
-        else if (event.type == sf::Event::KeyReleased) {
-            handleKeyRelease(event.key.code);
-        }
-    }
-}
-
-void GameScreen::handleKeyPress(sf::Keyboard::Key key) {
-    switch (key) {
-    case sf::Keyboard::S: pressS(); break;
-    case sf::Keyboard::D: pressD(); break;
-    case sf::Keyboard::F: pressF(); break;
-    case sf::Keyboard::Space: pressSpace(); break;
-    case sf::Keyboard::J: pressJ(); break;
-    case sf::Keyboard::K: pressK(); break;
-    case sf::Keyboard::L: pressL(); break;
-        // 추가적인 키에 대한 case 추가
-    }
-}
-
-void GameScreen::handleKeyRelease(sf::Keyboard::Key key) {
-    switch (key) {
-    case sf::Keyboard::S: releaseS(); break;
-    case sf::Keyboard::D: releaseD(); break;
-    case sf::Keyboard::F: releaseF(); break;
-    case sf::Keyboard::Space: releaseSpace(); break;
-    case sf::Keyboard::J: releaseJ(); break;
-    case sf::Keyboard::K: releaseK(); break;
-    case sf::Keyboard::L: releaseL(); break;
-        // 추가적인 키에 대한 case 추가
-    }
-}
-void GameScreen::pressS() {
-    if (!isSPressed) {
-        noteRouteSTexture = noteRouteSTexturePressed;
-        isSPressed = true;
-        // 키가 눌렸을 때 추가 로직
-    }
-}
-
-void GameScreen::releaseS() {
-    if (isSPressed) {
-        noteRouteSTexture.loadFromFile(kNoteRouteSPath);
-        isSPressed = false;
-        // 키가 떼졌을 때 추가 로직
-    }
-}
-void GameScreen::pressD() {
-    // D 키가 눌렸을 때의 추가 로직
-    if (noteRouteDTexture.loadFromFile(kNoteRoutePressed)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::releaseD() {
-    // D 키가 떼졌을 때의 추가 로직
-    if (noteRouteDTexture.loadFromFile(kNoteRouteDPath)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::pressF() {
-    // K 키가 눌렸을 때의 추가 로직
-    if (noteRouteFTexture.loadFromFile(kNoteRoutePressed)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::releaseF() {
-    // K 키가 떼졌을 때의 추가 로직
-    if (noteRouteFTexture.loadFromFile(kNoteRouteFPath)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::pressSpace() {
-    // Space 키가 눌렸을 때의 추가 로직
-    if (noteRouteSpace1Texture.loadFromFile(kNoteRoutePressed) && noteRouteSpace2Texture.loadFromFile(kNoteRoutePressed)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::releaseSpace() {
-    // Space 키가 떼졌을 때의 추가 로직
-    if (noteRouteSpace1Texture.loadFromFile(kNoteRouteSpace1Path) && noteRouteSpace2Texture.loadFromFile(kNoteRouteSpace2Path)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-
-void GameScreen::pressJ() {
-    // J 키가 눌렸을 때의 추가 로직
-    if (noteRouteJTexture.loadFromFile(kNoteRoutePressed)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::releaseJ() {
-    // J 키가 떼졌을 때의 추가 로직
-    if (noteRouteJTexture.loadFromFile(kNoteRouteJPath)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::pressK() {
-    // J 키가 눌렸을 때의 추가 로직
-    if (noteRouteKTexture.loadFromFile(kNoteRoutePressed)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::releaseK() {
-    // J 키가 떼졌을 때의 추가 로직
-    if (noteRouteKTexture.loadFromFile(kNoteRouteKPath)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::pressL() {
-    // L 키가 눌렸을 때의 추가 로직
-    if (noteRouteLTexture.loadFromFile(kNoteRoutePressed)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
-void GameScreen::releaseL() {
-    // L 키가 떼졌을 때의 추가 로직
-    if (noteRouteLTexture.loadFromFile(kNoteRouteLPath)) {
-        // 성공적으로 이미지를 로드했을 때의 추가 로직
-        cout << "눌림";
-    }
-    else {
-        // 이미지 로드 실패 시 처리
-    }
-}
-
 
 void GameScreen::displayButtons() {
     window.draw(prevButton);
 }
-
 
 void GameScreen::render() {
     window.clear();
@@ -302,4 +239,24 @@ void GameScreen::displayNotes() {
 void GameScreen::displayJudgementLine() {
     // 판정 라인 이미지 표시
     // ...
+}
+
+void GameScreen::loadTextures() {
+    std::string backgroundImagePath = kBackgroundPathPrefix + std::to_string(nowSelected + 1) + ".png";
+    if (!backgroundTexture.loadFromFile(backgroundImagePath) ||
+        !gameInfoTexture.loadFromFile(kGameInfoPath) ||
+        !judgementLineTexture.loadFromFile(kJudgementLinePath) ||
+        !noteRouteSTexture.loadFromFile(kNoteRouteSPath) ||
+        !noteRouteDTexture.loadFromFile(kNoteRouteDPath) ||
+        !noteRouteFTexture.loadFromFile(kNoteRouteFPath) ||
+        !noteRouteSpace1Texture.loadFromFile(kNoteRouteSpace1Path) ||
+        !noteRouteSpace2Texture.loadFromFile(kNoteRouteSpace2Path) ||
+        !noteRouteJTexture.loadFromFile(kNoteRouteJPath) ||
+        !noteRouteKTexture.loadFromFile(kNoteRouteKPath) ||
+        !noteRouteLTexture.loadFromFile(kNoteRouteLPath) ||
+        !noteRoutePressedTexture.loadFromFile(kNoteRoutePressed) ||
+        !noteRouteLineTexture.loadFromFile(kNoteRouteLinePath) ||
+        !noteBasicTexture.loadFromFile(kNoteBasicPath)) {
+        // 이미지 로드 실패 처리
+    }
 }
