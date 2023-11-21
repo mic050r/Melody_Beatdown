@@ -16,7 +16,6 @@ string titleName;
 GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
     : window(window), isSPressed(false), nowSelected(nowSelected) {
     loadTextures(); // 이미지 로드
-    initPrevButton(); // 이전 버튼 초기화
     musicInfoList = {
         { "music/Aespa-Spicy.wav", sf::Texture(), std::make_shared<sf::Music>() },
         { "music/Aespa-Hold-On-Tight.wav", sf::Texture(), std::make_shared<sf::Music>() },
@@ -25,6 +24,11 @@ GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
 
     // 텍스처 초기화
     musicTextures = { sf::Texture(), sf::Texture(), sf::Texture() };
+
+    if (!font.loadFromFile(kFontPath)) {
+        // 폰트 파일 경로를 설정
+        std::cerr << "Error loading font." << std::endl;
+    }
 
     // 이미지 텍스처 미리 로드
     for (size_t i = 0; i < musicTextures.size(); ++i) {
@@ -193,25 +197,8 @@ void GameScreen::releaseL() {
     isSPressed = false;
 }
 
-void GameScreen::initPrevButton() {
-    prevButton.setSize(sf::Vector2f(80, 80));
-    prevButton.setPosition(25, 23);
-    sf::Texture prevButtonTexture;
 
-    if (!font.loadFromFile(kFontPath)) {
-        // 폰트 파일 경로를 설정
-    }
 
-    if (!prevButtonTexture.loadFromFile("images/music_prev_btn.png")) {
-        // 텍스처 로드 실패 처리
-    }
-
-    prevButton.setTexture(&prevButtonTexture);
-}
-
-void GameScreen::displayButtons() {
-    window.draw(prevButton);
-}
 
 void GameScreen::render() {
     window.clear();
@@ -230,6 +217,28 @@ void GameScreen::render() {
 }
 
 
+void GameScreen::displayGameInfo() {
+    DisplayText(window, titleName, font, 50, Color::White, 15, 771);
+    DisplayText(window, "000000", font, 50, Color::White, 657, 774);
+}
+
+void GameScreen::displayNotes() {
+    DisplayText(window, "S", font, 50, Color::White, 250, 656);
+    DisplayText(window, "D", font, 50, Color::White, 384, 656);
+    DisplayText(window, "F", font, 50, Color::White, 534, 656);
+    DisplayText(window, "SPACE BAR", font, 40, Color::White, 630, 656);
+    DisplayText(window, "J", font, 50, Color::White, 938, 656);
+    DisplayText(window, "K", font, 50, Color::White, 1083, 656);
+    DisplayText(window, "L", font, 50, Color::White, 1227, 656);
+}
+
+void GameScreen::displayButtons() {
+    prevButton.setSize(sf::Vector2f(80, 80));
+    prevButton.setPosition(25, 23);
+    std::string prevButtonPath = "images/music_prev_btn.png";
+    sf::Texture prevButtonTexture;
+    DisplayButton(window, prevButton, prevButtonPath, prevButtonTexture, 25, 23, 80, 80);
+}
 
 void GameScreen::displayBackground() {
     DisplayBackground(window, backgroundTexture);
@@ -280,20 +289,7 @@ void GameScreen::drawNotes() {
     }
 }
 
-void GameScreen::displayGameInfo() {
-    DisplayText(window, titleName, font, 50, Color::White, 15, 771);
-    DisplayText(window, "000000", font, 50, Color::White, 657, 774);
-}
 
-void GameScreen::displayNotes() {
-    DisplayText(window, "S", font, 50, Color::White, 250, 656);
-    DisplayText(window, "D", font, 50, Color::White, 384, 656);
-    DisplayText(window, "F", font, 50, Color::White, 534, 656);
-    DisplayText(window, "SPACE BAR", font, 40, Color::White, 630, 656);
-    DisplayText(window, "J", font, 50, Color::White, 938, 656);
-    DisplayText(window, "K", font, 50, Color::White, 1083, 656);
-    DisplayText(window, "L", font, 50, Color::White, 1227, 656);
-}
 
 void GameScreen::displayJudgementLine() {
     // 판정 라인 이미지 표시

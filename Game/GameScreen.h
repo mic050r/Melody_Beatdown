@@ -31,7 +31,7 @@ public:
     std::vector<sf::Texture> musicTextures;
     std::vector<Note> notes;  // 여러 노트를 저장할 벡터
 private:
-    GameScreen(sf::RenderWindow& window, int nowSelected, string titleName);
+    //GameScreen(sf::RenderWindow& window, int nowSelected);
     
 
     sf::RenderWindow& window;
@@ -85,7 +85,7 @@ private:
     void pressL();
     void releaseL();
 
-    void initPrevButton();
+    //void initPrevButton();
     void displayButtons();
     void displayBackground();
     void displayNoteRouteLines();
