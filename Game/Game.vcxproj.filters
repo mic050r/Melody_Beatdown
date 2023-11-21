@@ -58,5 +58,6 @@
     <None Include="GameFunctions.h">
       <Filter>헤더 파일</Filter>
     </None>
+    <None Include=".editorconfig" />
   </ItemGroup>
 </Project>

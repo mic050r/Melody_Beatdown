@@ -2,7 +2,7 @@
 #include "game_functions.h"
 #include <iostream>
 
-
+// MusicSelection 클래스: 음악 선택 화면과 관련된 기능을 담당하는 클래스
 MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
     // 음악 정보 초기화
     musicInfoList = {
@@ -21,7 +21,6 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
         }
     }
 
-
     // 버튼 초기화
     nextButton.setSize(sf::Vector2f(134, 134));
     nextButton.setPosition(1366, 401);
@@ -30,7 +29,7 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
         nextButton.setTexture(&nextButtonTexture);
     }
     else {
-        std::cout << "error";
+        std::cout << "Error loading next button texture.\n";
     }
 
     prevButton.setSize(sf::Vector2f(134, 134));
@@ -39,8 +38,12 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
     if (prevButtonTexture.loadFromFile("images/prev_btn.png")) {
         prevButton.setTexture(&prevButtonTexture);
     }
+    else {
+        std::cout << "Error loading previous button texture.\n";
+    }
 }
-// TODO : next,prev btn 이미지 오류 해결하기
+
+// MusicSelection 클래스의 run 함수: 음악 선택 화면 실행
 void MusicSelection::run() {
     sf::RenderWindow window(sf::VideoMode(1500, 843), "음악 선택");
 
@@ -91,9 +94,7 @@ void MusicSelection::run() {
                 window.draw(musicSprite);
                 window.draw(nextButton);
                 window.draw(prevButton);
-                
             }
-
             window.display();
         }
     }

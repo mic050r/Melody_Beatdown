@@ -12,6 +12,7 @@ public:
     void update();
     void render();
     const sf::RectangleShape& getPrevButton() const {
+        musicInfoList[nowSelected].music->stop();
         return prevButton;
     }
     string titleName; 
@@ -28,7 +29,7 @@ public:
     std::vector<sf::Texture> musicTextures;
 private:
     GameScreen(sf::RenderWindow& window, int nowSelected, string titleName);
-    void Game(string titleName);
+    
 
     sf::RenderWindow& window;
     bool isSPressed;

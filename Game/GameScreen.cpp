@@ -11,6 +11,8 @@ using namespace sf;
 using namespace std;
 
 Font font;
+string titleName;
+
 GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
     : window(window), isSPressed(false), nowSelected(nowSelected) {
     loadTextures(); // 이미지 로드
@@ -42,12 +44,18 @@ GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
         musicInfoList[nowSelected].music->play();
     }
 
+    switch (nowSelected) {
+    case 0:
+        titleName = "Spicy";
+        break;
+    case 1:
+        titleName = "Hold On Tight";
+        break;
+    case 2:
+        titleName = "Better Things";
+    }
 }
 
-
-void GameScreen::Game(string titleName) {
-    this->titleName = titleName;
-}                          
 
 void GameScreen::handleInput() {
     sf::Event event;

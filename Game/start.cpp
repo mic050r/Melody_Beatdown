@@ -1,51 +1,52 @@
-ï»¿#include "game_functions.h"
+#include "game_functions.h"
 #include "MusicSelection.h"
 
 using namespace sf;
 
-// StartScreen í´ë˜ìŠ¤: ê²Œì„ ì‹œì‘ í™”ë©´ê³¼ ê´€ë ¨ëœ ê¸°ëŠ¥ì„ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤
+// StartScreen Å¬·¡½º: °ÔÀÓ ½ÃÀÛ È­¸é°ú °ü·ÃµÈ ±â´ÉÀ» ´ã´çÇÏ´Â Å¬·¡½º
 class StartScreen {
 private:
-    RenderWindow window;            // ê²Œì„ ì°½ ê°ì²´
-    Texture backgroundTexture;      // ê²Œì„ ì‹œì‘ í™”ë©´ ë°°ê²½ ì´ë¯¸ì§€ í…ìŠ¤ì²˜
+    RenderWindow window;            // °ÔÀÓ Ã¢ °´Ã¼
+    Texture backgroundTexture;      // °ÔÀÓ ½ÃÀÛ È­¸é ¹è°æ ÀÌ¹ÌÁö ÅØ½ºÃ³
 
 public:
-    // ìƒì„±ì: ê²Œì„ ì°½ í¬ê¸° ì„¤ì • ë° ë°°ê²½ ì´ë¯¸ì§€ ë¡œë“œ
-    StartScreen() : window(VideoMode(1500, 843), "ë¦¬ë“¬ ê²Œì„") {
-        // ê²Œì„ ì‹œì‘ í™”ë©´ì˜ ë°°ê²½ ì´ë¯¸ì§€ ë¡œë“œ
+    // »ı¼ºÀÚ: °ÔÀÓ Ã¢ Å©±â ¼³Á¤ ¹× ¹è°æ ÀÌ¹ÌÁö ·Îµå
+    StartScreen() : window(VideoMode(1500, 843), "Melody BeatDown Start~!") {
+       
+        // °ÔÀÓ ½ÃÀÛ È­¸éÀÇ ¹è°æ ÀÌ¹ÌÁö ·Îµå
         if (!backgroundTexture.loadFromFile("images/start_background.png")) {
-            // ì´ë¯¸ì§€ ë¡œë“œì— ì‹¤íŒ¨í•œ ê²½ìš°, ê·¸ëƒ¥ ë¦¬í„´í•˜ê³  ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ
+            // ÀÌ¹ÌÁö ·Îµå¿¡ ½ÇÆĞÇÑ °æ¿ì, ±×³É ¸®ÅÏÇÏ°í ¾Æ¹«°Íµµ ÇÏÁö ¾ÊÀ½
             return;
         }
     }
 
-    // ê²Œì„ ì‹œì‘ í™”ë©´ ë Œë”ë§ ë° ì´ë²¤íŠ¸ ì²˜ë¦¬
+    // °ÔÀÓ ½ÃÀÛ È­¸é ·»´õ¸µ ¹× ÀÌº¥Æ® Ã³¸®
     void run() {
         while (window.isOpen()) {
             Event event;
             while (window.pollEvent(event)) {
                 if (event.type == Event::Closed)
-                    window.close(); // ì°½ ë‹«ê¸° ì´ë²¤íŠ¸ ê°ì§€ ì‹œ ì°½ì„ ë‹«ìŒ
+                    window.close(); // Ã¢ ´İ±â ÀÌº¥Æ® °¨Áö ½Ã Ã¢À» ´İÀ½
                 else if (event.type == Event::MouseButtonPressed) {
-                    // í™”ë©´ í´ë¦­ ì´ë²¤íŠ¸ ê°ì§€ ì‹œ, ìŒì•… ì„ íƒ í™”ë©´ìœ¼ë¡œ ì „í™˜
+                    // È­¸é Å¬¸¯ ÀÌº¥Æ® °¨Áö ½Ã, À½¾Ç ¼±ÅÃ È­¸éÀ¸·Î ÀüÈ¯
                     MusicSelection musicSelection;
                     musicSelection.run();
 
-                    window.close(); // ê²Œì„ ì‹œì‘ í™”ë©´ì€ ë” ì´ìƒ í•„ìš”í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ ì°½ì„ ë‹«ìŒ
+                    window.close(); // °ÔÀÓ ½ÃÀÛ È­¸éÀº ´õ ÀÌ»ó ÇÊ¿äÇÏÁö ¾ÊÀ¸¹Ç·Î Ã¢À» ´İÀ½
                 }
             }
 
-            window.clear();                     // ì°½ ë‚´ìš©ì„ ì§€ìš°ê³ 
-            DisplayBackground(window, backgroundTexture);  // ë°°ê²½ ì´ë¯¸ì§€ë¥¼ ì°½ì— ë Œë”ë§
-            window.display();                   // ì°½ì„ í™”ë©´ì— í‘œì‹œ
+            window.clear();                     // Ã¢ ³»¿ëÀ» Áö¿ì°í
+            DisplayBackground(window, backgroundTexture);  // ¹è°æ ÀÌ¹ÌÁö¸¦ Ã¢¿¡ ·»´õ¸µ
+            window.display();                   // Ã¢À» È­¸é¿¡ Ç¥½Ã
         }
     }
 };
 
-// ë©”ì¸ í•¨ìˆ˜: ê²Œì„ ì‹œì‘ í™”ë©´ ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ ê²Œì„ì„ ì‹œì‘í•¨
+// ¸ŞÀÎ ÇÔ¼ö: °ÔÀÓ ½ÃÀÛ È­¸é °´Ã¼¸¦ »ı¼ºÇÏ¿© °ÔÀÓÀ» ½ÃÀÛÇÔ
 int main() {
-    StartScreen startScreen;    // StartScreen ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ ê²Œì„ ì‹œì‘ í™”ë©´ ê´€ë¦¬ ìˆ˜í–‰
-    startScreen.run();          // ê²Œì„ ì‹œì‘ í™”ë©´ ì‹¤í–‰
+    StartScreen startScreen;    // StartScreen °´Ã¼¸¦ »ı¼ºÇÏ¿© °ÔÀÓ ½ÃÀÛ È­¸é °ü¸® ¼öÇà
+    startScreen.run();          // °ÔÀÓ ½ÃÀÛ È­¸é ½ÇÇà
 
-    return 0;                   // í”„ë¡œê·¸ë¨ ì¢…ë£Œ
+    return 0;
 }
