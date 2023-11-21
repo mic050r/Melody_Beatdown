@@ -96,6 +96,7 @@ void GameScreen::handleKeyPress(sf::Keyboard::Key key) {
     else if (key == sf::Keyboard::L) {
         pressL(); cout << "l눌림";
     }
+    // 추가적인 키에 대한 case 추가
 }
 
 void GameScreen::handleKeyRelease(sf::Keyboard::Key key) {

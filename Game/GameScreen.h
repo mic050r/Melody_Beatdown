@@ -11,13 +11,14 @@ using std::string;
 class GameScreen {
 public:
     GameScreen(sf::RenderWindow& window, int nowSelected);
-    void update();
-    void render();
+
+    string titleName;
+
     const sf::RectangleShape& getPrevButton() const {
         musicInfoList[nowSelected].music->stop();
         return prevButton;
     }
-    string titleName; 
+
     struct MusicInfo {
         std::string path;
         sf::Texture texture;
@@ -30,12 +31,20 @@ public:
     std::vector<MusicInfo> musicInfoList;
     std::vector<sf::Texture> musicTextures;
     std::vector<Note> notes;  // 여러 노트를 저장할 벡터
-private:
-    //GameScreen(sf::RenderWindow& window, int nowSelected);
+
+   
+    void update();
+    void render();
+    void handleKeyPress(sf::Keyboard::Key key);  // 함수 선언만 헤더에 있음
     
 
-    sf::RenderWindow& window;
+private:
+    int nowSelected; // nowSelected를 멤버 변수로 추가
     bool isSPressed;
+
+    sf::RenderWindow& window;
+    sf::RectangleShape prevButton;
+    sf::Font font;
 
     sf::Texture backgroundTexture;
     sf::Texture gameInfoTexture;
@@ -51,24 +60,14 @@ private:
     sf::Texture noteRoutePressedTexture;
     sf::Texture noteRouteLineTexture;
     sf::Texture noteBasicTexture;
+  
     void loadTextures(); // 이 함수를 추가하여 텍스처를 로드하도록 함
-    int nowSelected; // nowSelected를 멤버 변수로 추가
-    sf::RectangleShape prevButton;
-    sf::Font font;
 
     void initNotes();
-
     void updateNotes();
-
     void drawNotes();
     void handleInput();
-    void handleKeyPress(sf::Keyboard::Key key);
     void handleKeyRelease(sf::Keyboard::Key key);
-
-    void pressKey(sf::Texture& texture, const std::string& path);
-    void releaseKey(sf::Texture& texture, const std::string& path);
-    void pressKeyDual(sf::Texture& texture1, sf::Texture& texture2, const std::string& path1, const std::string& path2);
-    void releaseKeyDual(sf::Texture& texture1, sf::Texture& texture2, const std::string& path1, const std::string& path2);
 
     void pressS();
     void releaseS();
@@ -85,10 +84,9 @@ private:
     void pressL();
     void releaseL();
 
-    //void initPrevButton();
     void displayButtons();
     void displayBackground();
-    void displayNoteRouteLines();
+    //void displayNoteRouteLines();
     void displayGameInfo();
     void displayNotes();
     void displayJudgementLine();
