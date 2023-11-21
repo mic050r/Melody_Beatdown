@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "constants.h"
+#include "Note.h"
+
 using std::string;
 
 class GameScreen {
@@ -27,6 +29,7 @@ public:
 
     std::vector<MusicInfo> musicInfoList;
     std::vector<sf::Texture> musicTextures;
+    std::vector<Note> notes;  // 여러 노트를 저장할 벡터
 private:
     GameScreen(sf::RenderWindow& window, int nowSelected, string titleName);
     
@@ -53,6 +56,11 @@ private:
     sf::RectangleShape prevButton;
     sf::Font font;
 
+    void initNotes();
+
+    void updateNotes();
+
+    void drawNotes();
     void handleInput();
     void handleKeyPress(sf::Keyboard::Key key);
     void handleKeyRelease(sf::Keyboard::Key key);

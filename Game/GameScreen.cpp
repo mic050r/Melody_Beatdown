@@ -217,14 +217,19 @@ void GameScreen::render() {
     window.clear();
 
     displayBackground();
-    displayNoteRouteLines();
+    //displayNoteRouteLines();
     displayGameInfo();
     displayNotes();
     displayJudgementLine();
     displayButtons();
+    initNotes();
+    updateNotes();
+    drawNotes();
 
     window.display();
 }
+
+
 
 void GameScreen::displayBackground() {
     DisplayBackground(window, backgroundTexture);
@@ -237,10 +242,6 @@ void GameScreen::displayBackground() {
     DisplayNote(window, noteRouteLineTexture, 1025, 0);
     DisplayNote(window, noteRouteLineTexture, 1165, 0);
     DisplayNote(window, noteRouteLineTexture, 1310, 0);
-}
-
-void GameScreen::displayNoteRouteLines() {
-    DisplayNote(window, gameInfoTexture, 0, 763);
     DisplayNote(window, noteRouteSTexture, 190, 0);
     DisplayNote(window, noteRouteDTexture, 330, 0);
     DisplayNote(window, noteRouteFTexture, 470, 0);
@@ -249,14 +250,34 @@ void GameScreen::displayNoteRouteLines() {
     DisplayNote(window, noteRouteJTexture, 890, 0);
     DisplayNote(window, noteRouteKTexture, 1030, 0);
     DisplayNote(window, noteRouteLTexture, 1170, 0);
-    DisplayNote(window, noteBasicTexture, 194, 358);
-    DisplayNote(window, noteBasicTexture, 335, 240);
-    DisplayNote(window, noteBasicTexture, 474, 512);
-    DisplayNote(window, noteBasicTexture, 681, 422);
-    DisplayNote(window, noteBasicTexture, 888, 23);
-    DisplayNote(window, noteBasicTexture, 1029, 240);
-    DisplayNote(window, noteBasicTexture, 1172, 382);
+    DisplayNote(window, gameInfoTexture, 0, 763);
     DisplayNote(window, judgementLineTexture, 0, 660);
+}
+
+void GameScreen::initNotes() {
+    // 노트 초기화 로직
+    notes.push_back(Note::createNote(194));
+    notes.push_back(Note::createNote(335));
+    notes.push_back(Note::createNote(474));
+    notes.push_back(Note::createNote(681));
+    notes.push_back(Note::createNote(888));
+    notes.push_back(Note::createNote(1029));
+    notes.push_back(Note::createNote(1172));
+}
+
+
+void GameScreen::updateNotes() {
+    // 노트 업데이트 로직
+    for (auto& note : notes) {
+        note.update();
+    }
+}
+
+void GameScreen::drawNotes() {
+    // 노트를 화면에 그리는 로직
+    for (const auto& note : notes) {
+        window.draw(note);
+    }
 }
 
 void GameScreen::displayGameInfo() {
