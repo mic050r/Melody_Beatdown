@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "constants.h"
+using std::string;
 
 class GameScreen {
 public:
@@ -13,7 +14,22 @@ public:
     const sf::RectangleShape& getPrevButton() const {
         return prevButton;
     }
+    string titleName; 
+    struct MusicInfo {
+        std::string path;
+        sf::Texture texture;
+        std::shared_ptr<sf::Music> music;
+
+        MusicInfo(const std::string& path, const sf::Texture& texture, const std::shared_ptr<sf::Music>& music)
+            : path(path), texture(texture), music(music) {}
+    };
+
+    std::vector<MusicInfo> musicInfoList;
+    std::vector<sf::Texture> musicTextures;
 private:
+    GameScreen(sf::RenderWindow& window, int nowSelected, string titleName);
+    void Game(string titleName);
+
     sf::RenderWindow& window;
     bool isSPressed;
 
@@ -67,6 +83,4 @@ private:
     void displayGameInfo();
     void displayNotes();
     void displayJudgementLine();
-
-    
 };

@@ -11,13 +11,43 @@ using namespace sf;
 using namespace std;
 
 Font font;
-
 GameScreen::GameScreen(sf::RenderWindow& window, int nowSelected)
     : window(window), isSPressed(false), nowSelected(nowSelected) {
     loadTextures(); // 이미지 로드
     initPrevButton(); // 이전 버튼 초기화
+    musicInfoList = {
+        { "music/Aespa-Spicy.wav", sf::Texture(), std::make_shared<sf::Music>() },
+        { "music/Aespa-Hold-On-Tight.wav", sf::Texture(), std::make_shared<sf::Music>() },
+        { "music/Aespa-Better-Things.wav", sf::Texture(), std::make_shared<sf::Music>() }
+    };
+
+    // 텍스처 초기화
+    musicTextures = { sf::Texture(), sf::Texture(), sf::Texture() };
+
+    // 이미지 텍스처 미리 로드
+    for (size_t i = 0; i < musicTextures.size(); ++i) {
+        if (musicTextures[i].loadFromFile("images/music" + std::to_string(i + 1) + ".png")) {
+            // 텍스처 로드 성공
+        }
+    }
+    // 음악 로딩 및 재생
+    for (size_t i = 0; i < musicInfoList.size(); ++i) {
+        if (musicInfoList[i].music->openFromFile(musicInfoList[i].path)) {
+            musicInfoList[i].music->stop();
+        }
+    }
+
+    // 선택된 음악 재생
+    if (nowSelected >= 0 && nowSelected < musicInfoList.size()) {
+        musicInfoList[nowSelected].music->play();
+    }
+
 }
 
+
+void GameScreen::Game(string titleName) {
+    this->titleName = titleName;
+}                          
 
 void GameScreen::handleInput() {
     sf::Event event;
@@ -222,7 +252,7 @@ void GameScreen::displayNoteRouteLines() {
 }
 
 void GameScreen::displayGameInfo() {
-    DisplayText(window, "SPICY", font, 50, Color::White, 15, 771);
+    DisplayText(window, titleName, font, 50, Color::White, 15, 771);
     DisplayText(window, "000000", font, 50, Color::White, 657, 774);
 }
 
@@ -259,4 +289,7 @@ void GameScreen::loadTextures() {
         !noteBasicTexture.loadFromFile(kNoteBasicPath)) {
         // 이미지 로드 실패 처리
     }
+
+
+   
 }
