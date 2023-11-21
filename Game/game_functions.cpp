@@ -1,5 +1,6 @@
 #include "game_functions.h"
 #include "MusicSelection.h"
+#include <iostream>
 
 // 해당 버튼이 클릭되었는지 여부를 확인하는 함수
 bool isButtonClicked(const sf::RectangleShape& button, const sf::Vector2f& clickPosition) {
@@ -39,4 +40,19 @@ void DisplayText(sf::RenderWindow& window, const std::string& text, const sf::Fo
     displayText.setFillColor(color);
     displayText.setPosition(x, y);
     window.draw(displayText);
+}
+
+void DisplayButton(sf::RenderWindow& window, sf::RectangleShape& button, const std::string& path, sf::Texture& buttonTexture, float x, float y, float width, float height) {
+    button.setSize(sf::Vector2f(width, height));  // 버튼 크기 설정
+    button.setPosition(x, y);  // 버튼 위치 설정
+
+    if (buttonTexture.loadFromFile(path)) {
+        button.setTexture(&buttonTexture);
+    }
+    else {
+        std::cout << "Error loading button texture. Using default texture.\n";
+        // 기본 이미지 설정 또는 다른 처리
+    }
+
+    window.draw(button);  // 화면에 버튼 표시
 }

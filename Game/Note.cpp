@@ -3,6 +3,7 @@
 #include "Note.h"
 #include <iostream>
 #include "constants.h"
+#include "game_functions.h"
 
 Note::Note(int x) : x(x), y(580 - SLEEP_TIME * NOTE_SPEED) {
     // noteBasicTexture 파일로부터 로드

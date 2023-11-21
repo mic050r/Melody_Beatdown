@@ -11,13 +11,8 @@ using namespace std;
 
 
 void gameStart(int nowSelected) {
-    RenderWindow window(VideoMode(1500, 843), "게임 화면");
-    Font font;
-
-    if (!font.loadFromFile(kFontPath)) {
-        // 폰트 파일 경로를 설정
-    }
-
+    RenderWindow window(VideoMode(1500, 843), "Game");
+    
     GameScreen gameScreen(window, nowSelected);
 
     while (window.isOpen()) {

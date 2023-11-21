@@ -1,7 +1,8 @@
 #include "MusicSelection.h"
 #include "game_functions.h"
-#include <iostream>
 
+#include <iostream>
+#include <string>
 // MusicSelection 클래스: 음악 선택 화면과 관련된 기능을 담당하는 클래스
 MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
     // 음악 정보 초기화
@@ -20,32 +21,22 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
             // 텍스처 로드 성공
         }
     }
-
-    // 버튼 초기화
-    nextButton.setSize(sf::Vector2f(134, 134));
-    nextButton.setPosition(1366, 401);
-    sf::Texture nextButtonTexture;
-    if (nextButtonTexture.loadFromFile("images/next_btn.png")) {
-        nextButton.setTexture(&nextButtonTexture);
-    }
-    else {
-        std::cout << "Error loading next button texture.\n";
-    }
-
-    prevButton.setSize(sf::Vector2f(134, 134));
-    prevButton.setPosition(0, 401);
-    sf::Texture prevButtonTexture;
-    if (prevButtonTexture.loadFromFile("images/prev_btn.png")) {
-        prevButton.setTexture(&prevButtonTexture);
-    }
-    else {
-        std::cout << "Error loading previous button texture.\n";
-    }
+   
+   
 }
 
 // MusicSelection 클래스의 run 함수: 음악 선택 화면 실행
 void MusicSelection::run() {
-    sf::RenderWindow window(sf::VideoMode(1500, 843), "음악 선택");
+    sf::RenderWindow window(sf::VideoMode(1500, 843), "Choose Music!");
+    sf::RectangleShape nextButton;
+    sf::RectangleShape prevButton;  // prevButton 정의
+    sf::Texture nextButtonTexture;
+    sf::Texture prevButtonTexture;
+    std::string nextButtonPath = "images/next_btn.png";
+    std::string prevButtonPath = "images/prev_btn.png";
+
+    DisplayButton(window, nextButton, nextButtonPath, nextButtonTexture, 1366, 401, 134, 134);
+    DisplayButton(window, prevButton, prevButtonPath, prevButtonTexture, 0, 401, 134, 134);
 
     // 음악 로딩 및 재생
     for (size_t i = 0; i < musicInfoList.size(); ++i) {
@@ -57,6 +48,7 @@ void MusicSelection::run() {
     musicInfoList[currentMusicIndex].music->play();
 
     while (window.isOpen()) {
+        
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -92,8 +84,8 @@ void MusicSelection::run() {
                 sf::Sprite musicSprite(musicTextures[currentMusicIndex]);
                 musicSprite.setPosition(0, 0);
                 window.draw(musicSprite);
-                window.draw(nextButton);
                 window.draw(prevButton);
+                window.draw(nextButton);
             }
             window.display();
         }

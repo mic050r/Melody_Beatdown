@@ -257,12 +257,12 @@ void GameScreen::displayBackground() {
 void GameScreen::initNotes() {
     // 노트 초기화 로직
     notes.push_back(Note::createNote(194));
-    notes.push_back(Note::createNote(335));
+    /*notes.push_back(Note::createNote(335));
     notes.push_back(Note::createNote(474));
     notes.push_back(Note::createNote(681));
     notes.push_back(Note::createNote(888));
     notes.push_back(Note::createNote(1029));
-    notes.push_back(Note::createNote(1172));
+    notes.push_back(Note::createNote(1172));*/
 }
 
 
