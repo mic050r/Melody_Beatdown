@@ -1,5 +1,4 @@
 // Note.h
-
 #ifndef NOTE_H
 #define NOTE_H
 
@@ -13,14 +12,14 @@ private:
     int x, y;
 
 public:
-    static const int SLEEP_TIME = 1000;
-    static const int NOTE_SPEED = 2;
-    // 정적 멤버 함수 추가
-    static Note createNote(int x) {
-        return Note(x);
-    }
+    static const int NOTE_SPEED;
+    static const int SLEEP_TIME;
 
-    Note(int x);
+
+    // 정적 멤버 함수 추가
+    static Note createNote(int x, sf::RenderWindow& window);
+
+    Note(int x, sf::RenderWindow& window);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

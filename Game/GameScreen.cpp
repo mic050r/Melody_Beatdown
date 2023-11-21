@@ -265,15 +265,22 @@ void GameScreen::displayBackground() {
 }
 
 void GameScreen::initNotes() {
-    // 畴飘 檬扁拳 肺流
-    notes.push_back(Note::createNote(194));
-    /*notes.push_back(Note::createNote(335));
-    notes.push_back(Note::createNote(474));
-    notes.push_back(Note::createNote(681));
-    notes.push_back(Note::createNote(888));
-    notes.push_back(Note::createNote(1029));
-    notes.push_back(Note::createNote(1172));*/
+    notes.push_back(Note::createNote(194, window));
+    std::cout << "Note t积己" << std::endl;
+    notes.push_back(Note::createNote(335, window));
+    std::cout << "Note t积己" << std::endl;
+    notes.push_back(Note::createNote(474, window));
+    std::cout << "Note t积己" << std::endl;
+    notes.push_back(Note::createNote(681, window));
+    std::cout << "Note t积己" << std::endl;
+    notes.push_back(Note::createNote(888, window));
+    std::cout << "Note t积己" << std::endl;
+    notes.push_back(Note::createNote(1029, window));
+    std::cout << "Note t积己" << std::endl;
+    notes.push_back(Note::createNote(1172, window));
+
 }
+
 
 
 void GameScreen::updateNotes() {

@@ -9,6 +9,7 @@ void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture)
 // 게임 화면에 노트를 표시하는 함수
 // x, y는 노트의 위치
 void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int y);
+void DisplayNote2(sf::RenderWindow& window, sf::Sprite& note, sf::Texture& noteTexture, int x, int y);
 
 // 게임을 시작하고 게임 화면을 설정하는 함수
 // nowSelected는 현재 선택한 음악
