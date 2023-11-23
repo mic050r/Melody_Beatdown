@@ -22,7 +22,7 @@ ResultScreen::ResultScreen(int combo, int PERFECT, int GOOD, int MISS) : window(
 
     comboText.setFont(font);
     comboText.setCharacterSize(40);
-    comboText.setPosition(385, 466);
+    comboText.setPosition(390, 466);
 
     comboText.setString(std::to_string(combo));
 
@@ -51,6 +51,18 @@ void ResultScreen::run() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
+            }
+            else if (event.type == sf::Event::MouseButtonPressed) {
+                // 마우스 버튼이 눌렸을 때의 처리
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    // 버튼의 클릭 여부 확인
+                    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                    if (retry.getGlobalBounds().contains(mousePos)) {
+                        // 버튼을 클릭했을 때의 동작
+                        std::cout << "클릭됨" << std::endl;
+                        HandleMouseClick(retry, mousePos);
+                    }
+                }
             }
         }
 

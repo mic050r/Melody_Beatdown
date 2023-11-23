@@ -116,6 +116,16 @@ void RhythmGame::displayButtons() {
     std::string prevButtonPath = "images/music_prev_btn.png";
     sf::Texture prevButtonTexture;
     DisplayButton(window, prevButton, prevButtonPath, prevButtonTexture, 25, 23, 80, 80);
+
+    // 버튼 클릭 이벤트 처리
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        if (prevButton.getGlobalBounds().contains(mousePos)) {
+            std::cout << "클릭" << std::endl;
+            music.stop();
+            HandleMouseClick(prevButton, mousePos);
+        }
+    }
 }
 
 void RhythmGame::run() {
@@ -184,7 +194,5 @@ void RhythmGame::run() {
 
     ResultScreen resultScreen(combo, PERFECT, GOOD, MISS);
     resultScreen.run();
-   
-    
-
+  
 }
