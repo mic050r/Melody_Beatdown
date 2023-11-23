@@ -28,6 +28,23 @@ public:
     }
 };
 
+// 노트 입력 처리 함수
+void handleNoteInput(std::vector<Note*>& notes, int& combo, sf::RenderWindow& window, float judgmentRange);
+
+// 노트 입력 처리 함수
+void handleNoteInput(std::vector<Note*>& notes, int& combo, sf::RenderWindow& window, float judgmentRange) {
+    if (!notes.empty()) {
+        float noteY = notes.back()->sprite.getPosition().y;
+        if (noteY > window.getSize().y - 80 && noteY < window.getSize().y - 80 + judgmentRange) {
+            delete notes.back();  // 맞은 노트 삭제 및 메모리 해제
+            notes.pop_back();
+            combo++;
+            std::cout << "Combo: " << combo << std::endl;
+        }
+    }
+}
+
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(1500, 843), "Rhythm Game");
     window.setFramerateLimit(60);
@@ -45,6 +62,10 @@ int main() {
     sf::Clock clock;
     sf::Time elapsed;
     sf::Time noteSpawnTime; // 노트 생성 주기
+
+    sf::Clock gameClock; // 게임 시작 후 경과된 시간을 계산하기 위한 시계
+    const sf::Time gameDuration = sf::seconds(60); // 1분 동안의 게임 지속 시간
+
 
     std::vector<Note*> notes;  // Note 포인터를 사용하여 동적 할당
     float noteSpeed = 5.0f;
@@ -82,7 +103,7 @@ int main() {
     // 판정 범위 설정
     float judgmentRange = 50.0f;
 
-    while (window.isOpen()) {
+    while (window.isOpen() && gameClock.getElapsedTime() < gameDuration) {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -192,6 +213,8 @@ int main() {
     for (auto& note : notes) {
         delete note;
     }
+
+    std::cout << "Final Combo: " << combo << std::endl;
 
     return 0;
 }
