@@ -12,7 +12,8 @@ using namespace std;
 void gameStart(int nowSelected) {
     RenderWindow window(VideoMode(1500, 843), "Game");
 
-    RhythmGame rhythmGame;  // RhythmGame 인스턴스 생성
+    RhythmGame rhythmGame(nowSelected);  // RhythmGame 인스턴스 생성
+
     rhythmGame.run();
     while (window.isOpen()) {
         Event event;

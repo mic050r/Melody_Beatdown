@@ -1,11 +1,26 @@
 #include "RhythmGame.h"
 #include "Note.h"
 
-RhythmGame::RhythmGame()
+RhythmGame::RhythmGame(int nowSelected)
     : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(60)), noteSpeed(5.0f), judgmentRange(50.0f) {
     window.setFramerateLimit(60);
 
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    switch (nowSelected) {
+    case 0:
+        titleName = "Spicy";
+        song = "music/Aespa-Spicy.wav";
+        break;
+    case 1:
+        titleName = "Hold On Tight";
+        song = "music/Aespa-Hold-On-Tight.wav";
+        break;
+    case 2:
+        titleName = "Better Things";
+        song = "music/Aespa-Better-Things.wav";
+    }
+
 
     if (!font.loadFromFile("font/NanumGothic-Bold.ttf")) {
         std::cerr << "Failed to load font" << std::endl;
@@ -31,7 +46,7 @@ RhythmGame::RhythmGame()
     songTitleText.setFont(font);
     songTitleText.setCharacterSize(30);
     songTitleText.setPosition(10, 10);
-    songTitleText.setString("Aespa - Better Things");
+    songTitleText.setString(titleName);
 
     comboText.setFont(font);
     comboText.setCharacterSize(30);
@@ -87,7 +102,8 @@ void RhythmGame::drawTexts() {
 }
 
 void RhythmGame::run() {
-    if (!music.openFromFile("music/Aespa-Better-Things.wav")) {
+    
+    if (!music.openFromFile(song)) {
         std::cerr << "Failed to load music" << std::endl;
         return;
     }
