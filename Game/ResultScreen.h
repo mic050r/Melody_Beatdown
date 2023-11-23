@@ -7,11 +7,12 @@
 
 class ResultScreen {
 public:
-    ResultScreen(int combo, int PERFECT, int GOOD, int MISS);
+    ResultScreen(int combo, int PERFECT, int GOOD, int MISS, int nowSelected);
     int combo;
     int PERFECT;
     int GOOD;
     int MISS;
+    int nowSelected;
     void run();
 
 private:
@@ -24,8 +25,10 @@ private:
 
     sf::Texture backgroundTexture;
     sf::Texture retryTexture;
+    sf::Texture selectTexture;
 
     sf::RectangleShape retry;
+    sf::RectangleShape select;
 };
 
 #endif // RESULT_SCREEN_H

@@ -37,18 +37,6 @@ void DisplayNote(sf::RenderWindow& window, sf::Texture& noteTexture, int x, int 
     window.draw(note);
 }
 
-void DisplayNote2(sf::RenderWindow& window, sf::Sprite& note, sf::Texture& noteTexture, int x, int y) {
-    note.setTexture(noteTexture);
-    note.setPosition(x, y);
-    window.draw(note);
-}
-void DisplayNote3(sf::RenderWindow& window, sf::Sprite& sprite, sf::Texture& texture, int x, int y) {
-    sprite.setTexture(texture);
-    sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
-    window.draw(sprite);
-}
-
-
 // 게임 화면에 텍스트를 표시하는 함수
 void DisplayText(sf::RenderWindow& window, const std::string& text, const sf::Font& font, unsigned int fontSize, const sf::Color& color, float x, float y) {
     sf::Text displayText;
@@ -61,6 +49,7 @@ void DisplayText(sf::RenderWindow& window, const std::string& text, const sf::Fo
     window.draw(displayText);
 }
 
+// 버튼 만드는 함수
 void DisplayButton(sf::RenderWindow& window, sf::RectangleShape& button, const std::string& path, sf::Texture& buttonTexture, float x, float y, float width, float height) {
     button.setSize(sf::Vector2f(width, height));  // 버튼 크기 설정
     button.setPosition(x, y);  // 버튼 위치 설정

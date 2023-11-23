@@ -12,6 +12,7 @@ class RhythmGame {
         void run();
         std::string titleName;
         std::string song;
+        std::string backgroundImagePath;
        
 private:
     sf::RenderWindow window;
@@ -30,7 +31,10 @@ private:
     float noteSpeed;
     int nowSelected;
 
-    std::vector<sf::Text> menu;
+    //std::vector<sf::Text> menu;
+    // 이미지를 표시할 Sprite들을 담을 vector
+    //std::vector<sf::Sprite> menuImages;
+    std::vector<sf::RectangleShape> menuImages;
     sf::Font font;
 
     sf::RectangleShape separatorLine;

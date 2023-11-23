@@ -12,9 +12,6 @@ Note::Note(float speed, const std::string& imagePath, float initialX, float init
     // sprite에 로드한 텍스처를 설정
     sprite.setTexture(texture);
 
-    // 스프라이트의 크기를 이미지의 원본 크기 대비 50x30의 비율로 조정
-    sprite.setScale(sf::Vector2f(50.f / texture.getSize().x, 30.f / texture.getSize().y));
-
     // 스프라이트의 초기 위치를 initialX, initialY로 설정
     sprite.setPosition(initialX, initialY);
 }

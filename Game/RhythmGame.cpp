@@ -8,11 +8,11 @@
 
 // RhythmGame 클래스의 생성자입니다. 현재 선택된 곡에 따라 창 크기, 음악 파일 경로 등을 초기화
 RhythmGame::RhythmGame(int nowSelected)
-    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(30)), noteSpeed(5.0f), judgmentRange(70.0f), PERFECT(0), GOOD(0), MISS(0) {
+    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(10)), noteSpeed(7.0f), judgmentRange(70.0f), PERFECT(0), GOOD(0), MISS(0) {
     window.setFramerateLimit(60);
 
     // 현재 선택된 곡에 따라 배경 이미지 경로를 설정
-    std::string backgroundImagePath = kBackgroundPathPrefix + std::to_string(nowSelected + 1) + ".png";
+     backgroundImagePath = kBackgroundPathPrefix + std::to_string(nowSelected + 1) + ".png";
 
     // 곡 선택에 따른 정보 초기화
     switch (nowSelected) {
@@ -42,20 +42,35 @@ RhythmGame::RhythmGame(int nowSelected)
         std::cerr << "Failed to load font" << std::endl;
     }
 
-    // 게임 플레이 화면 상단에 표시되는 텍스트 설정
-    menu.push_back(sf::Text("D", font, 50));
-    menu.push_back(sf::Text("F", font, 50));
-    menu.push_back(sf::Text("J", font, 50));
-    menu.push_back(sf::Text("K", font, 50));
+   
 
-    float menuX = window.getSize().x / 2.0f - (menu.size() * 70.0f) / 2.0f;
+    // 메뉴에 대한 이미지 로드
+    for (int i = 0; i < 4; ++i) {
+        sf::RectangleShape menuItem(sf::Vector2f(148.0f, 70.0f));  // 검정색 직사각형 크기 조절 가능
+        menuItem.setFillColor(sf::Color::White);
+        //sf::Sprite menuItem;
+        ////std::string imagePath = "images/noteBasic.png";
+        //std::string imagePath = "images/menu_" + std::to_string(i+1) + ".png"; // 이미지 경로 설정
+        //sf::Texture menuTexture;
+
+        //if (!menuTexture.loadFromFile(imagePath)) {
+        //    std::cerr << "Failed to load menu image" << std::endl;
+        //    // 실패 처리를 추가할 수 있습니다.
+        //}
+
+        //menuItem.setTexture(menuTexture);
+        ////menuItem.setScale(0.5f, 0.5f); // 이미지 크기 조절
+        menuImages.push_back(menuItem);
+    }
+    // 메뉴 이미지 위치 설정
+    float menuX = window.getSize().x / 2.0f - (menuImages.size() * 140.0f) / 2.0f;
     float menuY = window.getSize().y - 70.0f;
 
-    // 메뉴 텍스트 위치 설정
-    for (auto& menuItem : menu) {
-        menuItem.setPosition(menuX, menuY);
-        menuX += 70.0f;
+    for (auto& menuImage : menuImages) {
+        menuImage.setPosition(menuX, menuY);
+        menuX += 150.0f; // 여기에서 간격을 조절
     }
+
 
     // 상단에 표시되는 분리선 설정
     separatorLine.setSize(sf::Vector2f(window.getSize().x, 2)); // 가로 길이 : 현재 윈도우의 가로 길이와 동일하게 설정
@@ -112,13 +127,21 @@ void RhythmGame::drawNotes() {
 
 // 메뉴 텍스트 그리기 함수
 void RhythmGame::drawMenu() {
-    for (const auto& menuItem : menu) {
-        window.draw(menuItem);
+    
+    // 메뉴 이미지 그리기
+    for (const auto& menuImage : menuImages) {
+        window.draw(menuImage);
     }
+    drawTexts();
+    drawNotes();
 }
 
 // 텍스트 그리기 함수
 void RhythmGame::drawTexts() {
+    DisplayText(window, "D", font, 50, sf::Color::Black, 530, 776);
+    DisplayText(window, "F", font, 50, sf::Color::Black, 680, 776);
+    DisplayText(window, "J", font, 50, sf::Color::Black, 830, 776);
+    DisplayText(window, "K", font, 50, sf::Color::Black, 977, 776);
 
     // 게임 플레이 화면 상단에 표시되는 곡 제목 설정
     DisplayText(window, titleName, font, 50, sf::Color::White, 15, 771);
@@ -174,10 +197,11 @@ void RhythmGame::run() {
 
         elapsed = clock.restart();
 
-        // 음표 생성 타이밍 처리
+        // 음표 생성 타이밍 처리 - 시간 간격 조절
         if (noteSpawnTime <= sf::Time::Zero) {
-            noteSpawnTime = sf::seconds(static_cast<float>(std::rand() % 4 + 1));
-            float randomX = menu[std::rand() % menu.size()].getPosition().x;
+            noteSpawnTime = sf::seconds(static_cast<float>(std::rand() % 2 + 1)); // 예: 1에서 2초 사이 간격
+            float randomX = menuImages[std::rand() % menuImages.size()].getPosition().x;
+
             notes.push_back(new Note(noteSpeed, "images/noteBasic.png", randomX, 0));
         }
         else {
@@ -201,10 +225,9 @@ void RhythmGame::run() {
 
         // 게임 플레이 화면 그리기
         DisplayBackground(window, backgroundTexture);
-        drawNotes();
         drawMenu();
         window.draw(separatorLine);
-        drawTexts();
+        
         displayButtons();
         window.display();
     }
@@ -216,6 +239,7 @@ void RhythmGame::run() {
 
     // 최종 결과 화면 표시
     music.stop();
-    ResultScreen resultScreen(combo, PERFECT, GOOD, MISS);
+    ResultScreen resultScreen(combo, PERFECT, GOOD, MISS, nowSelected);
+    std::cout << nowSelected;
     resultScreen.run();
 }

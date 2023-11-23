@@ -4,9 +4,11 @@
 #include "game_functions.h"
 #include <iostream>
 
-ResultScreen::ResultScreen(int combo, int PERFECT, int GOOD, int MISS) : window(sf::VideoMode(800, 600), "Result Screen") {
+ResultScreen::ResultScreen(int combo, int PERFECT, int GOOD, int MISS, int nowSelected) : window(sf::VideoMode(800, 600), "Result Screen") {
     window.setFramerateLimit(60);
 
+    this->nowSelected = nowSelected;
+    std::cout << nowSelected;
     // 게임 시작 화면의 배경 이미지 로드
     if (!backgroundTexture.loadFromFile("images/result_background.png")) {
         std::cerr << "이미지 로드 실패" << std::endl;
@@ -59,8 +61,12 @@ void ResultScreen::run() {
                     sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                     if (retry.getGlobalBounds().contains(mousePos)) {
                         // 버튼을 클릭했을 때의 동작
-                        std::cout << "클릭됨" << std::endl;
-                        HandleMouseClick(retry, mousePos);
+                        std::cout << "retry 클릭됨" << std::endl << nowSelected;
+                        gameStart(nowSelected);
+                    } else if (select.getGlobalBounds().contains(mousePos)) {
+                        // 버튼을 클릭했을 때의 동작
+                        std::cout << "select 클릭됨" << std::endl;
+                        HandleMouseClick(select, mousePos);
                     }
                 }
             }
@@ -68,7 +74,8 @@ void ResultScreen::run() {
 
         window.clear();
         DisplayBackground(window, backgroundTexture);  // 배경 이미지를 창에 렌더링
-        DisplayButton(window, retry, "images/select_music.png", retryTexture, 285, 562, 197, 22);
+        DisplayButton(window, retry, "images/retry.png", retryTexture, 569, 527, 231, 63);
+        DisplayButton(window, select, "images/select_music.png", selectTexture, 33, 528, 184, 63); 
 
         // 콤보 텍스트 그리기
         window.draw(comboText);
