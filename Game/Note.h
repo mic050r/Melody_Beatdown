@@ -1,31 +1,14 @@
-// Note.h
-#ifndef NOTE_H
-#define NOTE_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
-#include <string>
+#include <iostream>
 
-class Note : public sf::Drawable, public sf::Transformable {
-private:
-    sf::Texture noteBasicTexture;
-    sf::Sprite noteBasicSprite;
-    int x, y;
-
+class Note {
 public:
-    static const int NOTE_SPEED;
-    static const int SLEEP_TIME;
+    sf::Sprite sprite;
+    sf::Texture texture;
+    float speed;
 
-
-    // 정적 멤버 함수 추가
-    static Note createNote(int x, sf::RenderWindow& window);
-
-    Note(int x, sf::RenderWindow& window);
-
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
-    void drop();
-
-    void update();
+    Note(float speed, const std::string& imagePath, float initialX, float initialY);
+    void move();
 };
-
-#endif // NOTE_H

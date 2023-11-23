@@ -35,6 +35,12 @@ void DisplayNote2(sf::RenderWindow& window, sf::Sprite& note, sf::Texture& noteT
     note.setPosition(x, y);
     window.draw(note);
 }
+void DisplayNote3(sf::RenderWindow& window, sf::Sprite& sprite, sf::Texture& texture, int x, int y) {
+    sprite.setTexture(texture);
+    sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
+    window.draw(sprite);
+}
+
 
 // 게임 화면에 텍스트를 표시하는 함수
 void DisplayText(sf::RenderWindow& window, const std::string& text, const sf::Font& font, unsigned int fontSize, const sf::Color& color, float x, float y) {

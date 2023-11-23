@@ -120,8 +120,7 @@ void GameScreen::handleKeyRelease(sf::Keyboard::Key key) {
     }
     else if (key == sf::Keyboard::L) {
         releaseL();
-    }
-    // 추가적인 키에 대한 case 추가
+    } 
 }
 
 
@@ -198,21 +197,18 @@ void GameScreen::releaseL() {
     isSPressed = false;
 }
 
-
-
-
 void GameScreen::render() {
     window.clear();
 
     displayBackground();
-    //displayNoteRouteLines();
+    displayNoteRouteLines();
     displayGameInfo();
     displayNotes();
     displayJudgementLine();
-    displayButtons();
+    displayButtons();/*
     initNotes();
     updateNotes();
-    drawNotes();
+    drawNotes();*/
 
     window.display();
 }
@@ -264,23 +260,34 @@ void GameScreen::displayBackground() {
     DisplayNote(window, judgementLineTexture, 0, 660);
 }
 
-void GameScreen::initNotes() {
-    notes.push_back(Note::createNote(194, window));
-    std::cout << "Note t생성" << std::endl;
-    notes.push_back(Note::createNote(335, window));
-    std::cout << "Note t생성" << std::endl;
-    notes.push_back(Note::createNote(474, window));
-    std::cout << "Note t생성" << std::endl;
-    notes.push_back(Note::createNote(681, window));
-    std::cout << "Note t생성" << std::endl;
-    notes.push_back(Note::createNote(888, window));
-    std::cout << "Note t생성" << std::endl;
-    notes.push_back(Note::createNote(1029, window));
-    std::cout << "Note t생성" << std::endl;
-    notes.push_back(Note::createNote(1172, window));
+void GameScreen::displayNoteRouteLines() {
+    int initialY = 500; // 초기 y 값을 설정 (화면 위에서부터 내려오게 하려면 큰 값으로 시작)
 
+    DisplayNote(window, noteBasicTexture, 194, initialY);
+    DisplayNote(window, noteBasicTexture, 335, initialY - 118);
+    DisplayNote(window, noteBasicTexture, 474, initialY + 154);
+    DisplayNote(window, noteBasicTexture, 681, initialY + 64);
+    DisplayNote(window, noteBasicTexture, 888, initialY - 335);
+    DisplayNote(window, noteBasicTexture, 1029, initialY - 118);
+    DisplayNote(window, noteBasicTexture, 1172, initialY + 24);
 }
 
+
+//void GameScreen::initNotes() {
+//    notes.push_back(Note::createNote(194, window));
+//    std::cout << "Note t생성" << std::endl;
+//    notes.push_back(Note::createNote(335, window));
+//    std::cout << "Note t생성" << std::endl;
+//    notes.push_back(Note::createNote(474, window));
+//    std::cout << "Note t생성" << std::endl;
+//    notes.push_back(Note::createNote(681, window));
+//    std::cout << "Note t생성" << std::endl;
+//    notes.push_back(Note::createNote(888, window));
+//    std::cout << "Note t생성" << std::endl;
+//    notes.push_back(Note::createNote(1029, window));
+//    std::cout << "Note t생성" << std::endl;
+//    notes.push_back(Note::createNote(1172, window));
+//}
 
 
 void GameScreen::updateNotes() {
@@ -322,7 +329,7 @@ void GameScreen::loadTextures() {
         !noteBasicTexture.loadFromFile(kNoteBasicPath)) {
         // 이미지 로드 실패 처리
     }
-
-
-   
+    else {
+        std::cout << "이미지 로드 실패";
+    }
 }

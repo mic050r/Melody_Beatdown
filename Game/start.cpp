@@ -47,6 +47,7 @@ public:
 int main() {
     StartScreen startScreen;    // StartScreen 객체를 생성하여 게임 시작 화면 관리 수행
     startScreen.run();          // 게임 시작 화면 실행
+   
 
     return 0;
 }

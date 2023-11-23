@@ -86,7 +86,7 @@ private:
 
     void displayButtons();
     void displayBackground();
-    //void displayNoteRouteLines();
+    void displayNoteRouteLines();
     void displayGameInfo();
     void displayNotes();
     void displayJudgementLine();

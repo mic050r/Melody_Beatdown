@@ -1,7 +1,6 @@
-﻿#include "game_functions.h"
+#include "RhythmGame.h"
 
 int main() {
-    start(); // start() 함수 호출
-
-    return 0;
+	RhythmGame rhythmGame;
+	rhythmGame.run();
 }
