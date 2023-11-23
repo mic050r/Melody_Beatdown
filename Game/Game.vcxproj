@@ -154,6 +154,7 @@
     </ClCompile>
     <ClCompile Include="MusicSelection.cpp" />
     <ClCompile Include="Note.cpp" />
+    <ClCompile Include="ResultScreen.cpp" />
     <ClCompile Include="RhythmGame.cpp" />
     <ClCompile Include="StartScreen.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -174,6 +175,7 @@
     <ClInclude Include="KeyboardInputHandler.h" />
     <ClInclude Include="MusicSelection.h" />
     <ClInclude Include="Note.h" />
+    <ClInclude Include="ResultScreen.h" />
     <ClInclude Include="RhythmGame.h" />
     <ClInclude Include="StartScreen.h" />
   </ItemGroup>

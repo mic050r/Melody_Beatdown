@@ -20,6 +20,7 @@ private:
     sf::Time elapsed;
     sf::Time noteSpawnTime;
     sf::Time gameDuration;
+    sf::RectangleShape prevButton;
 
     std::vector<Note*> notes;
     float noteSpeed;
@@ -34,6 +35,9 @@ private:
     sf::Text comboText;
 
     int combo;
+    int PERFECT;
+    int GOOD;
+    int MISS;
     float judgmentRange;
     std::string judgment;
 
@@ -41,4 +45,5 @@ private:
     void drawNotes();
     void drawMenu();
     void drawTexts();
+    void displayButtons();
 };

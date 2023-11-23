@@ -1,8 +1,10 @@
 #include "RhythmGame.h"
 #include "Note.h"
+#include "game_functions.h"
+#include "ResultScreen.h"
 
 RhythmGame::RhythmGame(int nowSelected)
-    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(60)), noteSpeed(5.0f), judgmentRange(50.0f) {
+    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(5)), noteSpeed(5.0f), judgmentRange(50.0f), PERFECT(0), GOOD(0), MISS(0) {
     window.setFramerateLimit(60);
 
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -61,18 +63,24 @@ void RhythmGame::handleNoteInput(float judgmentRange) {
             delete notes.back();
             notes.pop_back();
             combo++;
-            judgment = "Great";
-            std::cout << "Combo: " << combo << " - Great" << std::endl;
+            
+            judgment = "Perfect";
+            PERFECT++;
+            std::cout << "Combo: " << combo << " - Perfect" << std::endl;
         }
         else if (noteY > window.getSize().y - 80 && noteY < window.getSize().y - 80 + 2 * judgmentRange) {
             delete notes.back();
             notes.pop_back();
             combo++;
+           
             judgment = "Good";
+            GOOD++;
             std::cout << "Combo: " << combo << " - Good" << std::endl;
         }
         else {
+            
             judgment = "Miss";
+            MISS++;
             std::cout << "Miss" << std::endl;
         }
     }
@@ -99,6 +107,15 @@ void RhythmGame::drawTexts() {
     sf::Text judgmentText(judgment, font, 50);
     judgmentText.setPosition(window.getSize().x / 2.0f - judgmentText.getLocalBounds().width / 2.0f, window.getSize().y - 150);
     window.draw(judgmentText);
+}
+
+
+void RhythmGame::displayButtons() {
+    prevButton.setSize(sf::Vector2f(80, 80));
+    prevButton.setPosition(100, 100);
+    std::string prevButtonPath = "images/music_prev_btn.png";
+    sf::Texture prevButtonTexture;
+    DisplayButton(window, prevButton, prevButtonPath, prevButtonTexture, 25, 23, 80, 80);
 }
 
 void RhythmGame::run() {
@@ -150,7 +167,7 @@ void RhythmGame::run() {
         drawMenu();
         window.draw(separatorLine);
         drawTexts();
-
+        displayButtons();
         window.display();
     }
 
@@ -159,4 +176,15 @@ void RhythmGame::run() {
     }
 
     std::cout << "Final Combo: " << combo << std::endl;
+    std::cout << "Final Combo: " << PERFECT << std::endl;
+    std::cout << "Final Combo: " << GOOD << std::endl;
+    std::cout << "Final Combo: " << MISS << std::endl;
+
+    music.stop();
+
+    ResultScreen resultScreen(combo, PERFECT, GOOD, MISS);
+    resultScreen.run();
+   
+    
+
 }
