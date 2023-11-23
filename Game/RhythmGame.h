@@ -12,6 +12,7 @@ class RhythmGame {
         void run();
         std::string titleName;
         std::string song;
+       
 private:
     sf::RenderWindow window;
     sf::Music music;
@@ -22,6 +23,9 @@ private:
     sf::Time gameDuration;
     sf::RectangleShape prevButton;
 
+    sf::Text comboText;
+
+    sf::Texture backgroundTexture;
     std::vector<Note*> notes;
     float noteSpeed;
     int nowSelected;
@@ -30,9 +34,6 @@ private:
     sf::Font font;
 
     sf::RectangleShape separatorLine;
-
-    sf::Text songTitleText;
-    sf::Text comboText;
 
     int combo;
     int PERFECT;

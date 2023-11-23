@@ -21,9 +21,6 @@
     <ClCompile Include="game_functions.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="game_play.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="MusicSelection.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>

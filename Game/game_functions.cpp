@@ -1,5 +1,6 @@
 #include "game_functions.h"
 #include "MusicSelection.h"
+#include "RhythmGame.h"
 #include <iostream>
 
 // 해당 버튼이 클릭되었는지 여부를 확인하는 함수
@@ -14,6 +15,12 @@ void HandleMouseClick(const sf::RectangleShape& button, const sf::Vector2f& clic
         musicSelection.run();
     }
 }
+
+void gameStart(int nowSelected) {
+    RhythmGame rhythmGame(nowSelected);  // RhythmGame 인스턴스 생성
+    rhythmGame.run();
+}
+
 
 // 배경을 특정 창에 표시하는 함수
 void DisplayBackground(sf::RenderWindow& window, sf::Texture& backgroundTexture) {
