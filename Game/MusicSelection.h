@@ -14,21 +14,25 @@ public:
 
 private:
     struct MusicInfo {
+        sf::Texture texture; 
         std::string path;
-        sf::Texture texture;
         std::shared_ptr<sf::Music> music;
 
         MusicInfo(const std::string& path, const sf::Texture& texture, const std::shared_ptr<sf::Music>& music)
             : path(path), texture(texture), music(music) {}
     };
 
-    std::vector<MusicInfo> musicInfoList;
-    std::vector<sf::Texture> musicTextures;
     int currentMusicIndex;
+    bool startGame;
 
     sf::RectangleShape nextButton;
-    sf::RectangleShape prevButton;
-    bool startGame;
+    sf::RectangleShape prevButton;  // prevButton Á¤ÀÇ
+    sf::Texture nextButtonTexture;
+    sf::Texture prevButtonTexture;
+
+    std::vector<MusicInfo> musicInfoList;
+    std::vector<sf::Texture> musicTextures;
+    
 };
 
 #endif // MUSICSELECTION_H

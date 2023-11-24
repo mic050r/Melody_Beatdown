@@ -1,18 +1,27 @@
 #pragma once
 
+#include "Note.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <vector>
-#include "Note.h"
 #include <string>
 
 class RhythmGame {
  public:
-        RhythmGame(int nowSelected);
-        void run();
-        std::string titleName;
-        std::string song;
-        std::string backgroundImagePath;
+
+     // 판정 결과를 나타내는 enum 정의
+    /* enum class Judgment {
+         PERFECT,
+         GOOD,
+         MISS
+     };*/
+
+    RhythmGame(int nowSelected);
+    void run();
+    std::string titleName;
+    std::string song;
+    std::string backgroundImagePath;
        
 private:
     sf::RenderWindow window;
@@ -23,28 +32,24 @@ private:
     sf::Time noteSpawnTime;
     sf::Time gameDuration;
     sf::RectangleShape prevButton;
-
-    sf::Text comboText;
-
-    sf::Texture backgroundTexture;
-    std::vector<Note*> notes;
-    float noteSpeed;
-    int nowSelected;
-
-    //std::vector<sf::Text> menu;
-    // 이미지를 표시할 Sprite들을 담을 vector
-    //std::vector<sf::Sprite> menuImages;
-    std::vector<sf::RectangleShape> menuImages;
-    sf::Font font;
-
     sf::RectangleShape separatorLine;
 
+    sf::Texture backgroundTexture;
+    sf::Text comboText;
+    sf::Font font;
+
+    std::vector<Note*> notes;
+    std::vector<sf::RectangleShape> menuImages;
+   
+    std::string judgment;
+
+    int nowSelected;
     int combo;
     int PERFECT;
     int GOOD;
     int MISS;
     float judgmentRange;
-    std::string judgment;
+    float noteSpeed;
 
     void handleNoteInput(float judgmentRange);
     void drawNotes();

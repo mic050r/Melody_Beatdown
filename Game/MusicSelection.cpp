@@ -12,7 +12,7 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
         { "music/Aespa-Better-Things.wav", sf::Texture(), std::make_shared<sf::Music>() }
     };
 
-    // 텍스처 초기화
+    // musicTextures: 음악 선택 화면에 사용될 이미지 텍스처를 저장하는 벡터
     musicTextures = { sf::Texture(), sf::Texture(), sf::Texture() };
 
     // 이미지 텍스처 미리 로드
@@ -28,10 +28,7 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
 // MusicSelection 클래스의 run 함수: 음악 선택 화면 실행
 void MusicSelection::run() {
     sf::RenderWindow window(sf::VideoMode(1500, 843), "Choose Music!");
-    sf::RectangleShape nextButton;
-    sf::RectangleShape prevButton;  // prevButton 정의
-    sf::Texture nextButtonTexture;
-    sf::Texture prevButtonTexture;
+    
     std::string nextButtonPath = "images/next_btn.png";
     std::string prevButtonPath = "images/prev_btn.png";
 

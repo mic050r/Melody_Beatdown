@@ -8,7 +8,7 @@
 
 // RhythmGame 클래스의 생성자입니다. 현재 선택된 곡에 따라 창 크기, 음악 파일 경로 등을 초기화
 RhythmGame::RhythmGame(int nowSelected)
-    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(10)), noteSpeed(7.0f), judgmentRange(70.0f), PERFECT(0), GOOD(0), MISS(0) {
+    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(50)), noteSpeed(7.0f), judgmentRange(70.0f), PERFECT(0), GOOD(0), MISS(0) {
     window.setFramerateLimit(60);
 
     // 현재 선택된 곡에 따라 배경 이미지 경로를 설정
@@ -99,7 +99,7 @@ void RhythmGame::handleNoteInput(float judgmentRange) {
             PERFECT++;
             std::cout << "Combo: " << combo << " - Perfect" << std::endl;
         }
-        else if (noteY > window.getSize().y - 80 && noteY < window.getSize().y - 80 + 2 * judgmentRange) {
+        else if (noteY > window.getSize().y - 100 && noteY < window.getSize().y - 100 + 2 * judgmentRange) {
             delete notes.back();
             notes.pop_back();
             combo++;
