@@ -1,8 +1,9 @@
 #include "StartScreen.h"
 #include "game_functions.h"
 #include "MusicSelection.h"
+#include "constants.h"
 
-StartScreen::StartScreen() : window(sf::VideoMode(1500, 843), "Melody BeatDown Start~!") {
+StartScreen::StartScreen() : window(sf::VideoMode(kWindowWidth, kWindowHeight), "Melody BeatDown Start~!") {
     // 게임 시작 화면의 배경 이미지 로드
     if (!backgroundTexture.loadFromFile("images/start_background.png")) {
         // 이미지 로드에 실패한 경우, 그냥 리턴하고 아무것도 하지 않음

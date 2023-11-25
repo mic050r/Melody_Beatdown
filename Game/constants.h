@@ -19,6 +19,8 @@ const std::string kNoteRouteLPath = "images/noteRoute.png";
 const std::string kNoteRoutePressed = "images/noteRoutePressed.png";
 const std::string kNoteRouteLinePath = "images/noteRouteLine.png";
 const std::string kNoteBasicPath = "images/noteBasic.png";
+const std::string nextButtonPath = "images/next_btn.png";
+const std::string prevButtonPath = "images/prev_btn.png";
 const int kWindowWidth = 1500;
 const int kWindowHeight = 843;
 

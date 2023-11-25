@@ -1,11 +1,13 @@
 #include "MusicSelection.h"
 #include "game_functions.h"
+#include "constants.h"
 
 #include <iostream>
 #include <string>
 // MusicSelection 클래스: 음악 선택 화면과 관련된 기능을 담당하는 클래스
 MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
     // 음악 정보 초기화
+
     musicInfoList = {
         { "music/Aespa-Spicy.wav", sf::Texture(), std::make_shared<sf::Music>() },
         { "music/Aespa-Hold-On-Tight.wav", sf::Texture(), std::make_shared<sf::Music>() },
@@ -20,18 +22,13 @@ MusicSelection::MusicSelection() : currentMusicIndex(0), startGame(false) {
         if (musicTextures[i].loadFromFile("images/music" + std::to_string(i + 1) + ".png")) {
             // 텍스처 로드 성공
         }
-    }
-   
-   
+    }   
 }
 
 // MusicSelection 클래스의 run 함수: 음악 선택 화면 실행
 void MusicSelection::run() {
-    sf::RenderWindow window(sf::VideoMode(1500, 843), "Choose Music!");
+    sf::RenderWindow window(sf::VideoMode(kWindowWidth, kWindowHeight), "Choose Music!");
     
-    std::string nextButtonPath = "images/next_btn.png";
-    std::string prevButtonPath = "images/prev_btn.png";
-
     DisplayButton(window, nextButton, nextButtonPath, nextButtonTexture, 1366, 401, 134, 134);
     DisplayButton(window, prevButton, prevButtonPath, prevButtonTexture, 0, 401, 134, 134);
 
@@ -41,8 +38,8 @@ void MusicSelection::run() {
             musicInfoList[i].music->stop();
         }
     }
-
     musicInfoList[currentMusicIndex].music->play();
+
 
     while (window.isOpen()) {
         

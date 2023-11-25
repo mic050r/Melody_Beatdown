@@ -8,7 +8,7 @@
 
 // RhythmGame 클래스의 생성자입니다. 현재 선택된 곡에 따라 창 크기, 음악 파일 경로 등을 초기화
 RhythmGame::RhythmGame(int nowSelected)
-    : window(sf::VideoMode(1500, 843), "Rhythm Game"), gameDuration(sf::seconds(50)), noteSpeed(7.0f), judgmentRange(70.0f), PERFECT(0), GOOD(0), MISS(0) {
+    : window(sf::VideoMode(kWindowWidth, kWindowHeight), "Rhythm Game"), gameDuration(sf::seconds(50)), noteSpeed(7.0f), judgmentRange(70.0f), PERFECT(0), GOOD(0), MISS(0) {
     window.setFramerateLimit(60);
 
     // 현재 선택된 곡에 따라 배경 이미지 경로를 설정
@@ -48,18 +48,6 @@ RhythmGame::RhythmGame(int nowSelected)
     for (int i = 0; i < 4; ++i) {
         sf::RectangleShape menuItem(sf::Vector2f(148.0f, 70.0f));  // 검정색 직사각형 크기 조절 가능
         menuItem.setFillColor(sf::Color::White);
-        //sf::Sprite menuItem;
-        ////std::string imagePath = "images/noteBasic.png";
-        //std::string imagePath = "images/menu_" + std::to_string(i+1) + ".png"; // 이미지 경로 설정
-        //sf::Texture menuTexture;
-
-        //if (!menuTexture.loadFromFile(imagePath)) {
-        //    std::cerr << "Failed to load menu image" << std::endl;
-        //    // 실패 처리를 추가할 수 있습니다.
-        //}
-
-        //menuItem.setTexture(menuTexture);
-        ////menuItem.setScale(0.5f, 0.5f); // 이미지 크기 조절
         menuImages.push_back(menuItem);
     }
     // 메뉴 이미지 위치 설정
@@ -93,7 +81,6 @@ void RhythmGame::handleNoteInput(float judgmentRange) {
             delete notes.back();
             notes.pop_back();
             combo++;
-
             // Perfect 판정 및 카운트
             judgment = "Perfect";
             PERFECT++;
@@ -103,7 +90,6 @@ void RhythmGame::handleNoteInput(float judgmentRange) {
             delete notes.back();
             notes.pop_back();
             combo++;
-
             // Good 판정 및 카운트
             judgment = "Good";
             GOOD++;
@@ -127,7 +113,6 @@ void RhythmGame::drawNotes() {
 
 // 메뉴 텍스트 그리기 함수
 void RhythmGame::drawMenu() {
-    
     // 메뉴 이미지 그리기
     for (const auto& menuImage : menuImages) {
         window.draw(menuImage);
